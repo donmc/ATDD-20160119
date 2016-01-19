@@ -49,8 +49,8 @@ public class Flight {
 	}
 
 	public String getFlightInfo() {
-		// TODO Auto-generated method stub
-		return (getFullFlightNumber() + "|" + getOrigin() + "->" + getDestination() + "|" + getMileage() + "miles");
+		return String.format("%s | %s -> %s | %d miles", 
+				getFullFlightNumber(), getOrigin(), getDestination(), getMileage());
 	}
 
 }

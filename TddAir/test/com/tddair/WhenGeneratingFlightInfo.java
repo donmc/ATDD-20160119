@@ -21,17 +21,17 @@ public class WhenGeneratingFlightInfo {
 
 	@Test
 	public void shouldBeProperlyFormatted() {
-		assertEquals("AA1234|DWF->SAN|350miles", firstFlight.getFlightInfo());
+		assertEquals("AA1234 | DWF -> SAN | 350 miles", firstFlight.getFlightInfo());
 	}
 	
 	@Test
 	public void shouldWorkForMultipleFlights() {
-		assertEquals("SN721|MIL->WAX|567miles", secondFlight.getFlightInfo());
+		assertEquals("SN721 | MIL -> WAX | 567 miles", secondFlight.getFlightInfo());
 	}
 	
 	@Test
 	public void shouldAllowForUnknownFlightNumbers() {
-		assertEquals("UNKNOWN|LAX->CHI|325miles", unknownFlight.getFlightInfo());
+		assertEquals("UNKNOWN | LAX -> CHI | 325 miles", unknownFlight.getFlightInfo());
 	}
 	
 	
