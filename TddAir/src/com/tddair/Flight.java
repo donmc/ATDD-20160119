@@ -9,6 +9,9 @@ public class Flight {
 	private int number;
 	private int mileage;
 
+	private static final String DELIMETER_PIPE = " | ";
+	private static final String DELIMETER_ARROW = " -> ";
+	
 	public Flight(String origin, String destination, int mileage, String airline, int number) {
 		if(origin == null || origin.length() != 3) {
 			throw new IllegalArgumentException("Invalid origin code");
@@ -45,6 +48,13 @@ public class Flight {
 	}
 	public int getMileage() {
 		return mileage;
+	}
+
+	public String getInfo() {  
+		
+		return getFullFlightNumber() + DELIMETER_PIPE 
+				+ getOrigin() + DELIMETER_ARROW + getDestination() + DELIMETER_PIPE
+				+ getMileage();
 	}
 	
 }
