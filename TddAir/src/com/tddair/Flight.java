@@ -3,6 +3,7 @@ package com.tddair;
 
 public class Flight {
 	
+	private static final String DELIMETER = "|";
 	private String origin;
 	private String destination;
 	private String airline;
@@ -17,7 +18,7 @@ public class Flight {
 			throw new IllegalArgumentException("Invalid destination code");
 		}
 		if(mileage < 100) {
-			throw new IllegalArgumentException("Mileage muse be greater than 100");
+			throw new IllegalArgumentException("Mileage must be greater than 100");
 		}
 		this.origin = origin;
 		this.destination = destination;
@@ -31,11 +32,15 @@ public class Flight {
 	}
 	
 	public String getFullFlightNumber() {
-		if (airline == null || number == 0) {
-			return "UNKNOWN";
-		}
-		return airline + number;
+
+		return (airline == null || number ==0 ) ? "UNKNOWN" : airline+number;
 	}
+	
+	public String getInfo()
+	{
+		return getFullFlightNumber() + DELIMETER + origin + " -> " + destination + DELIMETER + mileage + " miles";
+	}
+	
 	
 	public String getDestination() {
 		return destination;
