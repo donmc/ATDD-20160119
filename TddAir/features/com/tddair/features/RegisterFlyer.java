@@ -1,6 +1,7 @@
 package com.tddair.features;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import com.tddair.DuplicateMemberException;
 import com.tddair.Member;
@@ -11,10 +12,10 @@ import cucumber.api.java.en.When;
 
 public class RegisterFlyer {
 
-	TddAirApplication app = new TddAirApplication();
+	TddAirApplication app = TddSingleton.getTddAirApp();
 	Member member;
 	Exception duplicateMemberException;
-
+	
 	@When("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
 	public void a_flyer_with_username_and_email_registers(String arg1, String arg2) throws Throwable {
 		try {
