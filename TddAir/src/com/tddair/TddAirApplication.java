@@ -1,12 +1,12 @@
 package com.tddair;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TddAirApplication {
 	
 	private FlightDao flights = new FlightDao();
-	private List<Member> memberList = new ArrayList<Member>();
+	private Map<String, Member> memberMap = new HashMap<>();
 	
 	public TddAirApplication() {
 	}
@@ -21,16 +21,15 @@ public class TddAirApplication {
 			throw new RuntimeException("Username is already registered");
 		}
 		Member member = new Member(username, "donmc@gmail.com");
-		memberList.add(member);
+		memberMap.put(username, member);
 		return member;
 	}
 
 	public Member lookUpMember(String username) {
-		for(Member member: memberList){
-			if(username.equals(member.getUserName())){
-				return member;
-			}	
-		}
-		return null;
+		return memberMap.get(username);
+	}
+
+	public void completeFlight(Member member, String flightNumber) {
+		member.completeFlight(flights.getFlightBy(flightNumber));
 	}
 }

@@ -1,9 +1,10 @@
 package com.tddair;
 
-import cucumber.api.PendingException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import static org.junit.Assert.*;
 
 public class RegisterFlyerTest {
 	private Member member;
