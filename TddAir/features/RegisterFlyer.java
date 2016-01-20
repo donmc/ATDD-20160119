@@ -1,23 +1,29 @@
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import com.tddair.Flyer;
 import com.tddair.TddAirApplication;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class RegisterFlyer {
 
-	TddAirApplication app = new TddAirApplication();
-	Flyer memberUnderTest;
+	private TddAirApplication app = new TddAirApplication();
+	private Flyer memberUnderTest;
+	private Exception errorCondition;
 
 	@When("^a customer registers and chooses username \"([^\"]*)\" and provides email address \"([^\"]*)\"$")
 	public void a_customer_registers_and_chooses_username_and_provides_email_address(String arg1, String arg2)
 			throws Throwable {
 		memberUnderTest = new Flyer(arg1, arg2);
-		app.registerNewFlyer(memberUnderTest);
+
+		try {
+			app.registerNewFlyer(memberUnderTest);
+		} catch (Exception e) {
+			errorCondition = e;
+		}
 	}
 
 	@Then("^the customer is added as a Flyer$")
@@ -40,16 +46,14 @@ public class RegisterFlyer {
 		assertEquals(arg1, memberUnderTest.getBalance());
 	}
 
-	@When("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
-	public void a_flyer_with_username_and_email_registers(String arg1, String arg2) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	@Then("^error \"([^\"]*)\" is returned$")
+	public void error_is_returned(String errorMsg) throws Throwable {
+		assertEquals(errorMsg, errorCondition.getMessage());
 	}
 
-	@Then("^error \"([^\"]*)\" is returned$")
-	public void error_is_returned(String arg1) throws Throwable {
-		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+	@Then("^no error is returned$")
+	public void no_error_is_returned() throws Throwable {
+		assertNull(errorCondition);
 	}
 
 }

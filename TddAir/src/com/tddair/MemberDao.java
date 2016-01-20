@@ -16,6 +16,9 @@ public class MemberDao {
 	}
 
 	public void addMember(Flyer flyer) {
+		if (members.containsKey(flyer.getUsername())) {
+			throw new DuplicateUserException();
+		}
 		members.put(flyer.getUsername(), flyer);
 	}
 

@@ -2,6 +2,7 @@ package com.tddair;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,11 +11,13 @@ public class WhenRegisteringFlyers {
 
 	private Flyer member;
 
+	TddAirApplication app;
+
 	@Before
 	public void setup() {
 		String username = "username";
 		String email = "user@name.com";
-		TddAirApplication app = new TddAirApplication();
+		app = new TddAirApplication();
 		app.registerNewFlyer(new Flyer(username, email));
 		member = app.getFlyer(username);
 	}
@@ -74,5 +77,15 @@ public class WhenRegisteringFlyers {
 	@Test
 	public void shouldHaveDefaultMilesBalanceAsNewMember() {
 		assertEquals(Flyer.DEFAULT_BALANCE_INITIAL_VALUE, member.getBalance());
+	}
+
+	@Test
+	public void shouldErrorWithDupeUserName() {
+		try {
+			app.registerNewFlyer(new Flyer("username", "other@name.com"));
+			fail("Should throw DuplicateUserException");
+		} catch (DuplicateUserException e) {
+			assertEquals("Duplicate Username!", e.getMessage());
+		}
 	}
 }
