@@ -9,7 +9,7 @@ Feature: Registration
 		 When the flyer sumbits the registration form
 		 Then a member record is created in the database
 		  And the status for that member is "Red"
-		  And the balance for that member is 0 miles
+		  And the balance for that member is 10000 miles
 		  And the YTD balance for that member is 0 miles
 	
 	Scenario: Shared emails
@@ -22,7 +22,7 @@ Feature: Registration
 		 When the flyer sumbits the registration form
 		 Then a member record is created in the database
 		  And the status for that member is "Red"
-		  And the balance for that member is 0 miles
+		  And the balance for that member is 10000 miles
 		  And the YTD balance for that member is 0 miles
 
 	Scenario: Existing user name
