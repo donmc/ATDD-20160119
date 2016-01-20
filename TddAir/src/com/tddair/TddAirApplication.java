@@ -14,7 +14,7 @@ public class TddAirApplication {
 
 	public Member lookUpMember(String username) {
 		// TODO Auto-generated method stub
-		return null;
+		return new Member();
 	}
 
 	public void registerAsMember(String username, String email) {

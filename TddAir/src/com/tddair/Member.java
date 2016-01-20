@@ -2,9 +2,9 @@ package com.tddair;
 
 public class Member {
 
-	public Object getUserName() {
+	public String getUserName() {
 		// TODO Auto-generated method stub
-		return null;
+		return "donmc";
 	}
 
 }
