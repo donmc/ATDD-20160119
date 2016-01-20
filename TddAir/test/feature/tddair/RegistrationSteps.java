@@ -59,7 +59,7 @@ public class RegistrationSteps {
 	@Then("^the balance for that member is (\\d+) miles$")
 	public void testMemberTotalBalance(final int expectedTotalBalance) throws Throwable {
 	    assertEquals("Initial balance should be " + expectedTotalBalance, 
-	    		expectedTotalBalance, this.member.getTotalBalance());
+	    		expectedTotalBalance, this.member.getRewardBalance());
 	}
 
 	@Then("^the YTD balance for that member is (\\d+) miles$")

@@ -14,8 +14,8 @@ Feature: Registration
 	
 	Scenario: Shared emails
 		Given existing members
-		      | userName | emailAddress     | status | totalBalance | ytdBalance |
-		      | test1    | test1@tddair.com | Golden | 100000       | 100000     |
+		      | userName | emailAddress     | status | rewardBalance | ytdBalance |
+		      | test1    | test1@tddair.com | Golden | 100000        | 100000     |
 		  And a flyer with the username "test2"
 		  And the flyer has email address "test1@tddair.com"
 		  And the flyer's email address already used by another registered member
@@ -27,8 +27,8 @@ Feature: Registration
 
 	Scenario: Existing user name
 		Given existing members
-		      | userName | emailAddress     | status | totalBalance | ytdBalance |
-		      | test1    | test1@tddair.com | Golden | 100000       | 100000     |
+		      | userName | emailAddress     | status | rewardBalance | ytdBalance |
+		      | test1    | test1@tddair.com | Golden | 100000        | 100000     |
 		  And a flyer with the username "test1"
 		Given the flyer's user name already used by another registered member
 		 When the flyer sumbits the registration form

@@ -19,24 +19,25 @@ public class WhenRegisteringFlyer {
 		app.registerAsMember(userName, email);
 		
 		member = app.lookUpMember(userName);
+		
+		assertNotNull("Test Member should have been initialized to non-null", this.member);
 	}
 	
 	@Test
 	public void shouldSaveAsMember() {
-		assertNotNull(member);
 		assertEquals("test1", member.getUserName());
 	}
 
-	@Ignore
 	@Test
 	public void shouldHaveRedStatus() {
-		fail("Not implemented");
+		assertEquals("Initial status should be Red", 
+				"Red", member.getStatus());
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHave10000BonusMilesForBalance() {
-		fail("Not implemented");
+		assertEquals("Initial balance should be 10,000", 
+				10000, member.getRewardBalance());
 	}
 	
 	@Ignore

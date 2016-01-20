@@ -1,14 +1,20 @@
 package com.tddair;
 
+import com.tddair.constants.Status;
+
 public class Member {
 	private String userName;
 	private String emailAddress;
 	private String status;
-	private int totalBalance;
+	private int rewardBalance;
 	private int ytdBalance;
 	
 	public Member() {
-		this("", "", "Red", 0, 0);
+		this("", "");
+	}
+	
+	public Member(String userName, String email) {
+		this(userName, email, Status.RED, 0, 0);
 	}
 	
 	public Member(final String userName, final String emailAddress, final String status, 
@@ -16,12 +22,8 @@ public class Member {
 		this.userName = userName;
 		this.emailAddress = emailAddress;
 		this.status = status;
-		this.totalBalance = totalBalance;
+		this.rewardBalance = totalBalance;
 		this.ytdBalance = ytdBalance;
-	}
-	
-	public Member(String userName, String email) {
-		this(userName, email, "Red", 0, 0);
 	}
 
 	public String getUserName() {
@@ -45,11 +47,11 @@ public class Member {
 		this.status = status;
 	}
 	
-	public int getTotalBalance() {
-		return totalBalance;
+	public int getRewardBalance() {
+		return rewardBalance;
 	}
 	public void setTotalBalance(final int totalBalance) {
-		this.totalBalance = totalBalance;
+		this.rewardBalance = totalBalance;
 	}
 	
 	public int getYtdBalance() {
