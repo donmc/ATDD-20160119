@@ -19,4 +19,13 @@ public enum MemberStatus {
 		this.upgradeInMile = upgradeInMiles;
 		this.upgradeInDollars = upgradeInDollars;
 	}
+
+	public static MemberStatus getStatus(long ytdMiles) {
+		for (MemberStatus status : MemberStatus.values()) {
+			if (status.minMiles <= ytdMiles && ytdMiles <= status.maxMiles) {
+				return status;
+			}
+		}
+		return MemberStatus.RED;
+	}
 }

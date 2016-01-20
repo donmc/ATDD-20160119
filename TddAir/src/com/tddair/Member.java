@@ -51,4 +51,10 @@ public class Member {
 		this.balanceMiles = balanceMiles;
 	}
 
+	public void completeFlight(int mileage) {
+		ytdMiles += mileage;
+		balanceMiles += mileage;
+		status = MemberStatus.getStatus(ytdMiles);
+	}
+
 }

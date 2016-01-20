@@ -45,4 +45,13 @@ public class TddAirApplication {
           java.util.regex.Matcher m = p.matcher(email);
           return m.matches();
    }
+
+	public void completeFlight(String userName, String fullFlightNumber) {
+		Member member = MemberDB.getMemberDB().getMember(userName);
+		Flight flight = flights.getFlightBy(fullFlightNumber);
+		if (member != null && flight!= null) {
+			member.completeFlight(flight.getMileage());
+		}
+		
+	}
 }
