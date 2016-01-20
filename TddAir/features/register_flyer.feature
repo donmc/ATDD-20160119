@@ -5,10 +5,10 @@ so that I can begin collection miles for rewards
 
 Scenario: Happy Path - customer not already a flyer
 When a customer registers and chooses username "username" and provides email address "user@name.com"
-Then the customer is added as a Flyer
-And Flyer has "Red" status
-And Flyer has 0 ytdMiles
-And Flyer has 10000 mile balance
+Then the customer with username "username" is added as a Flyer
+And Flyer with username "username" has "Red" status
+And Flyer with username "username" has 0 ytdMiles
+And Flyer with username "username" has 10000 mile balance
 And no error is returned
 
 @Errors

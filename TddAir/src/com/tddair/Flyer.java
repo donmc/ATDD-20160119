@@ -12,13 +12,15 @@ public class Flyer {
 
 	public static final int DEFAULT_BALANCE_INITIAL_VALUE = 10000;
 
+	public static final int DEFAULT_YTD_INITIAL_VALUE = 0;
+
 	private int balance = DEFAULT_BALANCE_INITIAL_VALUE;
 
 	private String username;
 
 	private String email;
 
-	private int ytdMiles = 0;
+	private int ytdMiles = DEFAULT_YTD_INITIAL_VALUE;
 
 	public Flyer(String username, String email) {
 		this.username = username;
@@ -54,6 +56,11 @@ public class Flyer {
 
 	public int getBalance() {
 		return balance;
+	}
+
+	public void completeFlight(Flight flight) {
+		ytdMiles += flight.getMileage();
+		balance += flight.getMileage();
 	}
 
 }

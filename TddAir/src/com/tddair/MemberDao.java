@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class MemberDao {
 
-	private Map<String, Flyer> members = new HashMap();
+	private Map<String, Flyer> members = new HashMap<String, Flyer>();
 
 	public MemberDao() {
 
@@ -20,6 +20,10 @@ public class MemberDao {
 			throw new DuplicateUserException();
 		}
 		members.put(flyer.getUsername(), flyer);
+	}
+
+	public void updateMember(Flyer member) {
+		members.put(member.getUsername(), member);
 	}
 
 }

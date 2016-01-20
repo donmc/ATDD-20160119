@@ -19,4 +19,12 @@ public class TddAirApplication {
 	public Flyer getFlyer(String username) {
 		return members.getByUserName(username);
 	}
+
+	public Flight getFlight(String flightNumber) {
+		return flights.getFlightBy(flightNumber);
+	}
+
+	public void updateMember(Flyer member) {
+		members.updateMember(member);
+	}
 }
