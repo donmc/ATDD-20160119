@@ -7,12 +7,14 @@ public class Member {
 	String email;
 	Status status;
 	int balance;
+	int ytdMiles;
 	
 	public Member(String username, String email) {
 		this.username = username;
 		this.email = email;
 		this.status = Status.RED;
 		balance = PROMOTIONAL_BONUS_MILES;
+		ytdMiles = 0;
 	}
 	
 	public String getUserName() 
@@ -30,7 +32,12 @@ public class Member {
 
 	public int getYtdMiles() {
 		// TODO Auto-generated method stub
-		return -1;
+		return ytdMiles;
+	}
+
+	public String getEmail() {
+		// TODO Auto-generated method stub
+		return email;
 	}
 
 }

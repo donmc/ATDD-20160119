@@ -1,24 +1,24 @@
 package com.tddair;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class WhenRegisteringFlyers 
 {
 	private Member member = null;
+	private TddAirApplication tddAirApp = null;
+
 
 	@Before
 	public void setup()
 	{
 		String username = "martym";
 		String email = "martymcfly@future.com";
-		TddAirApplication tddAirApp = new TddAirApplication();
+		tddAirApp = new TddAirApplication();
 		tddAirApp.registerAsMember(username, email);
 		
 		member = tddAirApp.lookUp(username);
@@ -29,6 +29,17 @@ public class WhenRegisteringFlyers
 	{
 		assertNotNull(member);
 		assertEquals("martym", member.getUserName());
+	}
+	
+	@Test
+	public void shouldNotSaveDuplicateMember() 
+	{
+		//Setup
+		tddAirApp.registerAsMember("martym", "marty2mcfly@future.com");
+		Member duplicateMember = tddAirApp.lookUp("martym");
+		
+		assertNotNull(duplicateMember);
+		assertNotEquals("marty2mcfly@future.com", duplicateMember.getEmail());
 	}
 
 	@Test
@@ -51,6 +62,5 @@ public class WhenRegisteringFlyers
 	{
 		int ytdMiles = member.getYtdMiles();
 		assertEquals(0, ytdMiles);
-
 	}
 }
