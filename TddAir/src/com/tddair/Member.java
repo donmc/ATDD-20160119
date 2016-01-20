@@ -15,17 +15,10 @@ public class Member {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public Category getStatus() {
 		return Category.Red;
 	}
 
-	public void setStatus(Category status) {
-		this.status = status;
-	}
 
 	public Integer getYtdMiles() {
 		return new Integer(0);

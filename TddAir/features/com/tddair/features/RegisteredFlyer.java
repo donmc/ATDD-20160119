@@ -16,6 +16,7 @@ public class RegisteredFlyer {
 
 	private TddAirApplication app;
 	private Member member1;
+	private String duplicateMessage;
 
 	public RegisteredFlyer() {
 		super();
@@ -25,7 +26,13 @@ public class RegisteredFlyer {
 	@When("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
 	public void a_flyer_with_username_and_email_registers(String userName, String email) {
 		// Write code here that turns the phrase above into concrete actions
-		app.registerAsMember(userName, email);
+		try {
+			app.registerAsMember(userName, email);
+		}
+		catch (IllegalArgumentException e)
+		{
+			duplicateMessage = e.getMessage();
+		}
 	}
 
 	@Then("^system has user with username \"([^\"]*)\"$")
@@ -57,6 +64,6 @@ public class RegisteredFlyer {
 	@Then("^error \"([^\"]*)\" is returned$")
 	public void error_is_returned(String error) throws Throwable {
 		// Write code here that turns the phrase above into concrete actions
-		throw new PendingException();
+		assertEquals(error, duplicateMessage);
 	}
 }

@@ -14,7 +14,12 @@ public class MemberDAO {
 
 	public void saveMember(Member newMember)
 	{
-		members.add(newMember);
+		if (!hasMember(newMember))
+		{
+			members.add(newMember);
+			
+		}
+		else throw new IllegalArgumentException("Duplicate username!");
 	}
 	
 	public Member getMember(String userName)
@@ -28,5 +33,15 @@ public class MemberDAO {
 			}
 		}
 		return found;
+	}
+	
+	private boolean hasMember(Member currentMember)
+	{
+		if (getMember(currentMember.getUserName()) == null)
+		{
+				return false;
+		}
+		else return true;
+		
 	}
 }
