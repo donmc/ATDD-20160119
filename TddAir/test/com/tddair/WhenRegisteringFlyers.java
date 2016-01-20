@@ -46,10 +46,11 @@ public class WhenRegisteringFlyers
 		assertEquals(10000,balance);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHave0YTD() 
 	{
-		fail("Not yet implemented");
+		int ytdMiles = member.getYtdMiles();
+		assertEquals(0, ytdMiles);
+
 	}
 }
