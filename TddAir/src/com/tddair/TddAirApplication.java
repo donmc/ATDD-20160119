@@ -4,6 +4,7 @@ package com.tddair;
 public class TddAirApplication {
 	
 	private FlightDao flights = new FlightDao();
+	private MemberDao members = new MemberDao();
 	
 	public TddAirApplication() {
 	}
@@ -13,12 +14,10 @@ public class TddAirApplication {
 	}
 
 	public void registerAsMember(String username, String email) {
-		// TODO Auto-generated method stub
-		
+		members.registerMember(username, email);		
 	}
 
 	public Member lookUp(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return members.getMember(username);
 	}
 }

@@ -30,11 +30,12 @@ public class WhenRegisteringFlyers
 		assertEquals("martym", member.getUserName());
 	}
 
-	@Ignore
 	@Test
 	public void shouldHaveRedStatus() 
 	{
-		fail("Not yet implemented");
+
+		Status status = member.getStatus();
+		assertEquals(Status.RED, status);
 	}
 	
 	@Ignore
