@@ -1,6 +1,6 @@
-Feature: Points tracking
+Feature: Flight tracking/points accumulation
 	As a member
-	I want flights tracked
+	I want completed flights tracked
 	So that I can get to the next status and get more rewards
 	
 	Scenario: Member reaches the green status
