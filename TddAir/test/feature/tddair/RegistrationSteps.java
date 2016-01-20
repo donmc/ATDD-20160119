@@ -18,6 +18,11 @@ public class RegistrationSteps {
 	private String userName;
 	private String emailAddress;
 	
+	@Given("^no members exist$")
+	public void noMembersExist() {
+		StepData.reset();
+	}
+	
 	@Given("^existing members$")
 	public void existing_members(final List<Member> membersTable) throws Throwable {
 	    StepData.getMemberDAO().addAll(membersTable);

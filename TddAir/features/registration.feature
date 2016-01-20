@@ -3,6 +3,9 @@ Feature: Registration
 	I want to register as a Frequent-Flyer Member
 	So that I can start collecting miles to get rewards
 	
+	Background:
+		Given no members exist
+	
 	Scenario: Everything is simple
 		Given a flyer with the username "test1" and the email address "test1@tddair.com"
 		 When the flyer sumbits the registration form
