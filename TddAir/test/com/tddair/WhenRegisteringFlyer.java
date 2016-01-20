@@ -1,24 +1,26 @@
 package com.tddair;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
-public class WhenRegisteringFlyer {
+import com.tddair.exceptions.DuplicateUserNameException;
 
+public class WhenRegisteringFlyer {
+	private TddAirApplication app;
 	private Member member;
 	
 	@Before
 	public void setup() {
+		this.app = new TddAirApplication();
+		
 		//setup
 		String userName = "test1";
 		String email = "test1@tddair.com";
-		TddAirApplication app = new TddAirApplication();
-		app.registerAsMember(userName, email);
-		
-		member = app.lookUpMember(userName);
+		this.app.registerAsMember(userName, email);
+		this.member = app.lookUpMember(userName);
 		
 		assertNotNull("Test Member should have been initialized to non-null", this.member);
 	}
@@ -44,5 +46,12 @@ public class WhenRegisteringFlyer {
 	public void shouldHave0YTDMiles() {
 		assertEquals("Initial YTD balance should be 0", 
 				0, member.getYtdBalance());
+	}
+	
+	@Test(expected = DuplicateUserNameException.class)
+	public void duplicateMemberRegistrationNotAllowed() throws Exception {
+		String userName = "test1";
+		String email = "test1@tddair.com";
+		this.app.registerAsMember(userName, email);
 	}
 }
