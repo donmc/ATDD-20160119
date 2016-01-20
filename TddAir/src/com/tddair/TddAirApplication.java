@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.tddair.exceptions.DuplicateUserNameException;
 
+import cucumber.api.PendingException;
+
 public class TddAirApplication {
 	
 	private FlightDao flights = new FlightDao();
@@ -49,5 +51,9 @@ public class TddAirApplication {
 
 	public MemberDAO getMemberDAO() {
 		return this.memberDAO;
+	}
+
+	public void completeFlight(Member member, String flightNumber) {
+		throw new PendingException("Not yet implemented");
 	}
 }
