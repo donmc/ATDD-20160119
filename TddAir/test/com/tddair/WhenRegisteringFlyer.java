@@ -50,10 +50,13 @@ public class WhenRegisteringFlyer {
 		assertEquals(Category.Red, member1.getStatus());
 	}
 	
-	
-	
 	@Test
 	public void shouldHaveYtdMiles(){
-		assertEquals(0, member1.getYtdMiles());
+		assertEquals(new Integer(0), member1.getYtdMiles());
+	}
+	
+	@Test
+	public void shouldHave10000BonusMilesForBalance(){
+		assertEquals(new Integer(10000), member1.getMilesBalance());
 	}
 }

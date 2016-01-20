@@ -19,7 +19,6 @@ public class Member {
 	}
 
 	public Category getStatus() {
-		// TODO Auto-generated method stub
 		return Category.Red;
 	}
 
@@ -28,6 +27,10 @@ public class Member {
 	}
 
 	public Integer getYtdMiles() {
+		return new Integer(0);
+	}
+
+	public Integer getMilesBalance() {
 		// TODO Auto-generated method stub
 		return null;
 	}
