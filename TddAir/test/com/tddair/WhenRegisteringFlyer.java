@@ -40,9 +40,9 @@ public class WhenRegisteringFlyer {
 				10000, member.getRewardBalance());
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHave0YTDMiles() {
-		fail("Not implemented");
+		assertEquals("Initial YTD balance should be 0", 
+				0, member.getYtdBalance());
 	}
 }
