@@ -33,4 +33,11 @@ public class Member {
 		this.milesBalance = milesBalance;
 	}
 
+	public void completeFlight(Flight completedFlight) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 }
