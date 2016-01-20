@@ -13,7 +13,7 @@ public class WhenRegisteringFlyer {
 	private Member member;
 	
 	@Before
-	public void setup() {
+	public void setup() throws DuplicateUserNameException {
 		this.app = new TddAirApplication();
 		
 		//setup

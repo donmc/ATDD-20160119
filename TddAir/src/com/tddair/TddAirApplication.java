@@ -1,5 +1,6 @@
 package com.tddair;
 
+import com.tddair.exceptions.DuplicateUserNameException;
 
 public class TddAirApplication {
 	
@@ -19,8 +20,9 @@ public class TddAirApplication {
 	 * 
 	 * @param userName
 	 * @param email
+	 * @throws DuplicateUserNameException 
 	 */
-	public void registerAsMember(String userName, String email) {
+	public void registerAsMember(String userName, String email) throws DuplicateUserNameException {
 		memberDAO.add(new Member(userName, email));
 	}
 	

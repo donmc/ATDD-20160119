@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.tddair.constants.ErrorMessage;
+import com.tddair.exceptions.DuplicateUserNameException;
+
 public class MemberDAO {
 	private final List<Member> members = new ArrayList<>();
 	
@@ -11,7 +14,11 @@ public class MemberDAO {
 		this.members.clear();
 	}
 	
-	public boolean add(final Member member) {
+	public boolean add(final Member member) throws DuplicateUserNameException {
+
+		if (this.getMemberByUserName(member.getUserName()) != null)
+			throw new DuplicateUserNameException(ErrorMessage.DUPLICATE_USER); 
+		
 		return this.members.add(member);
 	}
 
