@@ -39,8 +39,22 @@ public class Member {
 
 	public void completeFlight(Flight flight) {
 		int mileage = flight.getMileage();
-		ytdMiles += mileage;
+		
+		updateBalance(mileage);
+		updateYtdMiles(mileage);
+		updateStatus();
+	}
+
+	private void updateBalance(int mileage) {
 		balance += mileage;
+	}
+
+	private void updateYtdMiles(int mileage) {
+		ytdMiles += mileage;
+	}
+
+	private void updateStatus() {
+		status = Status.getStatus(ytdMiles);
 	}
 
 }

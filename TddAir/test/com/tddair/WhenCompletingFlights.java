@@ -46,24 +46,50 @@ public class WhenCompletingFlights {
 		
 		Flight flight = tddAir.getFlight("QF191");
 		int miles = flight.getMileage();
+		
+		assertEquals(marty.getStatus(), Status.RED);
+		
+		for (int total=marty.getYtdMiles(); total < 25000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.GREEN);
+	}
+	
+	@Test
+	public void shouldHaveGreenStatusStayGreen() {
+		Member marty = tddAir.lookUp("martymc");
+		
+		Flight flight = tddAir.getFlight("QF191");
+		int miles = flight.getMileage();
 		for (int total=marty.getYtdMiles(); total < 25000; total+=miles) {
 			marty.completeFlight(flight);
 		}
 		
 		assertEquals(marty.getStatus(), Status.GREEN);
 		
+		marty.completeFlight(flight);
+		
+		assertEquals(marty.getStatus(), Status.GREEN);
 	}
 	
-	@Ignore
-	@Test
-	public void shouldHaveGreenStatusStayGreen() {
-		fail("Not yet implemented");
-	}
-	
-	@Ignore
 	@Test
 	public void shouldHaveGreenStatusTurnBlue() {
-		fail("Not yet implemented");
+		Member marty = tddAir.lookUp("martymc");
+		
+		Flight flight = tddAir.getFlight("QF191");
+		int miles = flight.getMileage();
+		for (int total=marty.getYtdMiles(); total < 25000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.GREEN);
+		
+		for (int total=marty.getYtdMiles(); total < 50000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.BLUE);
 	}
 	
 	@Ignore
