@@ -40,10 +40,18 @@ public class WhenCompletingFlights {
 		assertEquals(member.getBalance(),calculatedBalance);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHaveRedStatusTurnGreen() {
-		fail("Not yet implemented");
+		Member marty = tddAir.lookUp("martymc");
+		
+		Flight flight = tddAir.getFlight("QF191");
+		int miles = flight.getMileage();
+		for (int total=marty.getYtdMiles(); total < 25000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.GREEN);
+		
 	}
 	
 	@Ignore
