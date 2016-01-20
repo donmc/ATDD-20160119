@@ -56,4 +56,16 @@ public class MemberDAO {
 	public boolean hasMemberWithEmailAddress(String email) {
 		return (this.getMemberByEmailAddress(email) != null);
 	}
+	
+	public int getNumMembers() {
+		return this.members.size();
+	}
+	
+	/**
+	 * Returns a list of all the stored members
+	 * @return A list of all the stored members. 
+	 */
+	public List<Member> getAllMembers() {
+		return this.members;
+	}
 }

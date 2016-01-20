@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.tddair.Member;
 import com.tddair.MemberDAO;
+import com.tddair.exceptions.DuplicateUserNameException;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -17,6 +18,9 @@ public class RegistrationSteps {
 	
 	/** Member for current test */
 	private Member member;
+	
+	private int numMembersBeforeRegistrationSubmitted = 0;
+	private Exception registrationSubmitException = null;
 	
 	@Given("^existing members$")
 	public void existing_members(final List<Member> membersTable) throws Throwable {
@@ -42,12 +46,19 @@ public class RegistrationSteps {
 	
 	@When("^the flyer sumbits the registration form$")
 	public void the_flyer_sumbits_the_registration_form() throws Throwable {
-	    // TODO: Stub
+	    try {
+	    	this.numMembersBeforeRegistrationSubmitted = this.memberDAO.getNumMembers();
+			this.memberDAO.add(this.member);
+		} catch (final Exception e) {
+			this.registrationSubmitException = e;
+		}
 	}
 	
 	@Then("^a member record is created in the database$")
 	public void createRecord() throws Throwable {
-		assertTrue("Member was not stored", this.memberDAO.add(this.member));
+		assertNull("Error occurred during registration", this.registrationSubmitException);
+		assertEquals("Member record was not created", 
+				this.memberDAO.getNumMembers(), this.numMembersBeforeRegistrationSubmitted + 1);
 	}
 
 	@Then("^the status for that member is \"([^\"]*)\"$")
@@ -90,6 +101,23 @@ public class RegistrationSteps {
 	    
 		assertTrue("DB should contain email address " + emailAddress, 
 	    		this.memberDAO.hasMemberWithEmailAddress(emailAddress));
+	}
+	
+	@Then("^a \"([^\"]*)\" error message is displayed$")
+	public void an_error_message_is_displayed(final String errorType) throws Throwable {
+		assertNotNull("A error was expected", 
+				this.registrationSubmitException);
+		
+		Class<?> expectedErrorType = Exception.class;
+		switch(errorType) {
+		case "duplicate user name":
+			expectedErrorType = DuplicateUserNameException.class;
+			break;
+		}
+		
+		final boolean errorIsProperType = 
+			expectedErrorType.isAssignableFrom(this.registrationSubmitException.getClass());
+		assertTrue("Error was of wrong type", errorIsProperType);
 	}
 	
 	

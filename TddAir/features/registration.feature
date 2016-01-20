@@ -32,5 +32,5 @@ Feature: Registration
 		  And a flyer with the username "test1"
 		Given the flyer's user name already used by another registered member
 		 When the flyer sumbits the registration form
-		 Then an error message is displayed
+		 Then a "duplicate user name" error message is displayed
 		  And a reset password link is displayed
