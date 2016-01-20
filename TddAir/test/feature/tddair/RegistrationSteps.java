@@ -56,14 +56,14 @@ public class RegistrationSteps {
 	@Then("^the status for \"([^\"]*)\" is \"([^\"]*)\"$")
 	public void testMemberStatus(final String userName, final String expectedStatus) throws Throwable {
 		final Member member = StepData.getMemberDAO().getMemberByUserName(userName);
-		assertEquals("Initial status should be " + expectedStatus, 
+		assertEquals("Status should be " + expectedStatus, 
 				expectedStatus, member.getStatus());
 	}
 
 	@Then("^the reward balance for \"([^\"]*)\" is (\\d+) miles$")
 	public void testMemberTotalBalance(final String userName, final int expectedTotalBalance) throws Throwable {
 		final Member member = StepData.getMemberDAO().getMemberByUserName(userName);
-		assertEquals("Initial balance should be " + expectedTotalBalance, 
+		assertEquals("Reward balance should be " + expectedTotalBalance, 
 	    		expectedTotalBalance, member.getRewardBalance());
 	}
 

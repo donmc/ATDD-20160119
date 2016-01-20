@@ -18,11 +18,11 @@ public class Member {
 	}
 	
 	public Member(final String userName, final String emailAddress, final String status, 
-			final int totalBalance, final int ytdBalance) {
+			final int rewardBalance, final int ytdBalance) {
 		this.userName = userName;
 		this.emailAddress = emailAddress;
 		this.status = status;
-		this.rewardBalance = totalBalance;
+		this.rewardBalance = rewardBalance;
 		this.ytdBalance = ytdBalance;
 	}
 
@@ -43,7 +43,10 @@ public class Member {
 	public String getStatus() {
 		return status;
 	}
-	
+	public void setStatus(final String status) {
+		this.status = status;
+	}
+
 	public int getRewardBalance() {
 		return rewardBalance;
 	}
