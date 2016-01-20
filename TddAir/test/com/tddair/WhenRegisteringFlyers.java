@@ -1,20 +1,25 @@
 package com.tddair;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+
 
 public class WhenRegisteringFlyers {
 
+	private Member member;
+	
 	@Before
 	public void setup() {
 		//setup
-		String username = "donmc";
-		String email = "don@improving.com";
 		TddAirApplication app = new TddAirApplication();
-		app.registerAsMember(username, email);
+		app.registerAsMember("donmc", "don@improving.com");
 		
-		Member member = app.lookUpMember(username);
+		member = app.lookUpMember("donmc");
+		System.out.println("Setup");
 	}
 	
 	@Test
@@ -23,22 +28,19 @@ public class WhenRegisteringFlyers {
 		assertEquals("donmc", member.getUserName());
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHaveRedStatus() {
-		
+		assertEquals(member.getStatus(), Status.RED);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldhave10000BonusMilesForBalance() {
-		
+		assertEquals(member.getMilesBalance(), 10000);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHave0YtdMiles() {
-		
+		assertEquals(member.getYtdMiles(), 0);
 	}
 
 }
