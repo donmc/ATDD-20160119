@@ -14,7 +14,7 @@ public class Member {
 	}
 	
 	public Member(String userName, String email) {
-		this(userName, email, Status.RED, 0, 0);
+		this(userName, email, Status.RED, 10000, 0);
 	}
 	
 	public Member(final String userName, final String emailAddress, final String status, 
