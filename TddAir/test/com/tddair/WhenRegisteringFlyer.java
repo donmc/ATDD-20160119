@@ -44,9 +44,7 @@ public class WhenRegisteringFlyer {
 	public void shouldBeMissingFromRegisteredMembers() {
 		assertNull(missingMember);
 	}
-	
 
-	@Ignore 
 	@Test
 	public void shouldHaveRedStatus(){
 		fail("Not yet implemented");

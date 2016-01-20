@@ -2,19 +2,19 @@ package com.tddair;
 
 public class Member {
 
-	private String username;
+	private String userName;
 
-	public Member(String username) {
+	public Member(String userName) {
 		super();
-		this.username = username;
+		this.userName = userName;
 	}
 
 	public String getUserName() {
-		return username;
+		return userName;
 	}
 
-	public void setUserName(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 }
