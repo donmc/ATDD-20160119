@@ -1,5 +1,8 @@
 package com.tddair;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.tddair.exceptions.DuplicateUserNameException;
 
 public class TddAirApplication {
@@ -35,5 +38,9 @@ public class TddAirApplication {
 	 */
 	public Member lookUpMember(String userName) {
 		return memberDAO.getMemberByUserName(userName);
+	}
+
+	public List<Member> getRegisteredMembers() {
+		return this.memberDAO.getAllMembers();
 	}
 }
