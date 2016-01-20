@@ -5,10 +5,13 @@ public class Member {
 	private String userName;
 	private Category status;
 	private Integer milesBalance;
+	private Integer ytdMiles;
 
 	public Member(String userName) {
 		super();
 		this.userName = userName;
+		milesBalance = new Integer(0);
+		ytdMiles = new Integer(0);
 	}
 
 	public String getUserName() {
@@ -18,14 +21,21 @@ public class Member {
 	public Category getStatus() {
 		return Category.Red;
 	}
+	
+	public void setStatus(Category status) {
+		this.status = status;
+	}
 
 
 	public Integer getYtdMiles() {
-		return new Integer(0);
+		return this.ytdMiles;
+	}
+
+	public void setYtdMiles(Integer ytdMiles) {
+		this.ytdMiles = ytdMiles;
 	}
 
 	public Integer getMilesBalance() {
-		// TODO Auto-generated method stub
 		return this.milesBalance;
 	}
 
@@ -34,10 +44,16 @@ public class Member {
 	}
 
 	public void completeFlight(Flight completedFlight) {
-		// TODO Auto-generated method stub
-		
+		addMiles(completedFlight.getMileage());
 	}
 
+	private void addMiles(int miles)
+	{
+		this.milesBalance = this.milesBalance + miles;
+		this.ytdMiles = this.ytdMiles + miles;
+	}
+
+	
 
 
 }
