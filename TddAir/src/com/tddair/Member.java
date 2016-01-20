@@ -3,6 +3,7 @@ package com.tddair;
 public class Member {
 
 	private String userName;
+	private Category status;
 
 	public Member(String userName) {
 		super();
@@ -18,6 +19,15 @@ public class Member {
 	}
 
 	public Category getStatus() {
+		// TODO Auto-generated method stub
+		return Category.Red;
+	}
+
+	public void setStatus(Category status) {
+		this.status = status;
+	}
+
+	public Integer getYtdMiles() {
 		// TODO Auto-generated method stub
 		return null;
 	}

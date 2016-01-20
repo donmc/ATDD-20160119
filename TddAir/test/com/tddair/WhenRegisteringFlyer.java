@@ -50,9 +50,10 @@ public class WhenRegisteringFlyer {
 		assertEquals(Category.Red, member1.getStatus());
 	}
 	
-	@Ignore
+	
+	
 	@Test
-	public void shouldHave0YtdMiles(){
-		fail("Not yet implemented");
+	public void shouldHaveYtdMiles(){
+		assertEquals(0, member1.getYtdMiles());
 	}
 }
