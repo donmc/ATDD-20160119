@@ -54,4 +54,13 @@ public class WhenRegisteringFlyer {
 		String email = "test1@tddair.com";
 		this.app.registerAsMember(userName, email);
 	}
+	
+	@Test
+	public void shouldAllowNewUserWithSameEmail() throws Exception {
+		String userName = "test2";
+		String email = "test1@tddair.com";
+		this.app.registerAsMember(userName, email);
+		
+		assertEquals(2, this.app.getRegisteredMembers().size());
+	}
 }
