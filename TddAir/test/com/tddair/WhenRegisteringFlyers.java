@@ -1,6 +1,7 @@
 package com.tddair;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertNotNull;
 
@@ -38,11 +39,11 @@ public class WhenRegisteringFlyers
 		assertEquals(Status.RED, status);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHave10000BonusMilesForBalance() 
 	{
-		fail("Not yet implemented");
+		int balance = member.getBalance();
+		assertEquals(10000,balance);
 	}
 	
 	@Ignore
