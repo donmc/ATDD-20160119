@@ -53,7 +53,7 @@ public class FlightTest {
 		
 		String fullFlightInfo = flight.getFlightInfo();
 		
-		assertEquals("AA1234|DFW->SAN|400miles", fullFlightInfo);
+		assertEquals("AA1234 | DFW -> SAN | 400 miles", fullFlightInfo);
 	}
 	
 	@Ignore
