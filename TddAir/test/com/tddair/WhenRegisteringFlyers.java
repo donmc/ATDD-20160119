@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -13,7 +12,7 @@ public class WhenRegisteringFlyers {
 	private Member member;
 	
 	@Before
-	public void setup() {
+	public void setup() throws DuplicateMemberException {
 		//setup
 		TddAirApplication app = new TddAirApplication();
 		app.registerAsMember("donmc", "don@improving.com");

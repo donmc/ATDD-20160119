@@ -15,7 +15,10 @@ public class TddAirApplication {
 		flights.addFlight(origin, destination, mileage, airline, number);
 	}
 
-	public void registerAsMember(String username, String email) {
+	public void registerAsMember(String username, String email) throws DuplicateMemberException {
+		if (lookUpMember(username) != null) {
+			throw new DuplicateMemberException("Duplicate username");
+		}
 		members.add(new Member(username, email));
 	}
 

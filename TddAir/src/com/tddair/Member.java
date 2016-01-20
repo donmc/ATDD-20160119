@@ -24,11 +24,37 @@ public class Member {
 		return status;
 	}
 	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+	
 	public int getMilesBalance() {
 		return milesBalance;
 	}
 	
 	public int getYtdMiles() {
 		return ytdMiles;
+	}
+	
+	public void setYtdMiles(int miles) {
+		this.ytdMiles = miles;
+	}
+	
+	public void completeFlight(Flight flight) {
+		this.ytdMiles += flight.getMileage();
+		this.milesBalance += flight.getMileage();
+		Status tentativeStatus = Status.RED;
+		if (this.getYtdMiles() >= 25000) {
+			tentativeStatus = Status.GREEN;
+		}
+		if (this.getYtdMiles() >= 50000) {
+			tentativeStatus = Status.BLUE;
+		}
+		if (this.getYtdMiles() >= 75000) {
+			tentativeStatus = Status.GOLD;
+		}
+		if (this.status.ordinal() < tentativeStatus.ordinal()) {
+			status = tentativeStatus;
+		}
 	}
 }
