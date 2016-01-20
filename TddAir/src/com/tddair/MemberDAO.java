@@ -20,25 +20,33 @@ public class MemberDAO {
 	}
 
 
-	public boolean hasMemberWithUserName(final String userName) {
+	public Member getMemberByUserName(final String userName) {
 		for(final Member m : members) {
 			if(m.getUserName().equals(userName)) {
-				return true;
+				return m;
 			}
 		}
 		
 		// no match found
-		return false;
+		return null;
 	}
 	
-	public boolean hasMemberWithEmailAddress(final String emailAddress) {
+	public Member getMemberByEmailAddress(final String emailAddress) {
 		for(final Member m : members) {
 			if(m.getEmailAddress().equals(emailAddress)) {
-				return true;
+				return m;
 			}
 		}
 		
 		// no match found
-		return false;
+		return null;
+	}
+
+	public boolean hasMemberWithUserName(String userName) {
+		return (this.getMemberByUserName(userName) != null);
+	}
+	
+	public boolean hasMemberWithEmailAddress(String email) {
+		return (this.getMemberByEmailAddress(email) != null);
 	}
 }

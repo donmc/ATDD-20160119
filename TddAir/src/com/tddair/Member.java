@@ -20,6 +20,10 @@ public class Member {
 		this.ytdBalance = ytdBalance;
 	}
 	
+	public Member(String userName, String email) {
+		this(userName, email, "Red", 0, 0);
+	}
+
 	public String getUserName() {
 		return userName;
 	}

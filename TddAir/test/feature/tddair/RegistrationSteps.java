@@ -1,8 +1,7 @@
 package feature.tddair;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+
 
 import java.util.List;
 
@@ -33,8 +32,12 @@ public class RegistrationSteps {
 	
 	@Given("^the flyer has email address \"([^\"]*)\"$")
 	public void emailAddress(final String emailAddress) throws Throwable {
-		initMember();
-		this.member.setEmailAddress(emailAddress);
+		try {
+			initMember();
+			this.member.setEmailAddress(emailAddress);
+		} catch (Exception e) {
+			fail("Exception should not occuring storing e-mail address.");
+		}
 	}
 	
 	@When("^the flyer sumbits the registration form$")
@@ -44,7 +47,7 @@ public class RegistrationSteps {
 	
 	@Then("^a member record is created in the database$")
 	public void createRecord() throws Throwable {
-	    this.memberDAO.add(this.member);
+		assertTrue("Member was not stored", this.memberDAO.add(this.member));
 	}
 
 	@Then("^the status for that member is \"([^\"]*)\"$")
