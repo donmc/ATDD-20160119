@@ -43,21 +43,12 @@ public class Member {
 	public String getStatus() {
 		return status;
 	}
-	public void setStatus(final String status) {
-		this.status = status;
-	}
 	
 	public int getRewardBalance() {
 		return rewardBalance;
 	}
-	public void setTotalBalance(final int totalBalance) {
-		this.rewardBalance = totalBalance;
-	}
 	
 	public int getYtdBalance() {
 		return ytdBalance;
-	}
-	public void setYtdBalance(final int ytdBalance) {
-		this.ytdBalance = ytdBalance;
 	}
 }

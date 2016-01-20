@@ -10,10 +10,6 @@ import com.tddair.exceptions.DuplicateUserNameException;
 public class MemberDAO {
 	private final List<Member> members = new ArrayList<>();
 	
-	public void clear() {
-		this.members.clear();
-	}
-	
 	public boolean add(final Member member) throws DuplicateUserNameException {
 
 		if (this.getMemberByUserName(member.getUserName()) != null)
