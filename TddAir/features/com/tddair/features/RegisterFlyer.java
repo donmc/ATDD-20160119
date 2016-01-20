@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import com.tddair.Member;
 import com.tddair.TddAirApplication;
 
-import cucumber.api.PendingException;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -13,10 +13,12 @@ public class RegisterFlyer {
 	
 	TddAirApplication tddAirApp = new TddAirApplication();
 	Member member;
+	String registartionStatus;
 
+	//@Given("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
 	@When("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
 	public void a_flyer_with_username_and_email_registers(String username, String email) throws Throwable {
-	    tddAirApp.registerAsMember(username, email);
+		registartionStatus = tddAirApp.registerAsMember(username, email);
 	}
 	
 	@Then("^system has use with username \"([^\"]*)\"$")
@@ -49,9 +51,8 @@ public class RegisterFlyer {
 	*/
 	
 	@Then("^error \"([^\"]*)\" is returned$")
-	public void error_is_returned(String arg1) throws Throwable {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+	public void error_is_returned(String errorMessage) throws Throwable {
+	    assertEquals(errorMessage, registartionStatus);
 	}
 	
 }

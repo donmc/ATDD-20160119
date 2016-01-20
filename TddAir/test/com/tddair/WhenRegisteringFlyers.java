@@ -39,7 +39,16 @@ public class WhenRegisteringFlyers
 		Member duplicateMember = tddAirApp.lookUp("martym");
 		
 		assertNotNull(duplicateMember);
-		assertNotEquals("marty2mcfly@future.com", duplicateMember.getEmail());
+		assertNotEquals("marty2mcfly@future.com", member.getEmail());
+	}
+	
+	@Test
+	public void shouldReturnDuplicateMemberErrorMessage() 
+	{
+		//Setup
+		String registrationStatus = tddAirApp.registerAsMember("martym", "marty2mcfly@future.com");
+
+		assertEquals(MemberConstants.REGISTRATION_DUPLICATE, registrationStatus);
 	}
 
 	@Test

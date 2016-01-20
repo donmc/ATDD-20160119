@@ -13,8 +13,8 @@ public class TddAirApplication {
 		flights.addFlight(origin, destination, mileage, airline, number);
 	}
 
-	public void registerAsMember(String username, String email) {
-		members.registerMember(username, email);		
+	public String registerAsMember(String username, String email) {
+		return members.registerMember(username, email);
 	}
 
 	public Member lookUp(String username) {
