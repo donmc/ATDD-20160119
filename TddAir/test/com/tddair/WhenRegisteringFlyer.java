@@ -47,7 +47,7 @@ public class WhenRegisteringFlyer {
 
 	@Test
 	public void shouldHaveRedStatus(){
-		fail("Not yet implemented");
+		assertEquals(Category.Red, member1.getStatus());
 	}
 	
 	@Ignore

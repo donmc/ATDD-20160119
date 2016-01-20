@@ -17,4 +17,9 @@ public class Member {
 		this.userName = userName;
 	}
 
+	public Category getStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
