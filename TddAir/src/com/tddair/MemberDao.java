@@ -16,7 +16,7 @@ public class MemberDao {
 	
 	public void registerMember(String username, String email) {
 		if(members.containsKey(username)) {
-			throw new DuplicateMemberException();
+			throw new DuplicateMemberException("Duplicate user name");
 		}
 		Member member = new Member(username, email);
 		members.put(username, member);

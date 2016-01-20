@@ -20,8 +20,8 @@ public class Member {
 		return username;
 	}
 
-	public int getStatus() {
-		return status;
+	public String getStatus() {
+		return Constants.STATUS_MAP.get(status);
 	}
 
 	public int getMilesBalance() {

@@ -36,7 +36,7 @@ public class WhenRegisteringFlyers {
 	
 	@Test
 	public void shouldHaveRedStatus() {
-		assertEquals(Constants.RED_STATUS, member.getStatus());
+		assertEquals("Red", member.getStatus());
 	}
 	
 	@Test
