@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class WhenGeneratingFlightInfo {
 
-	private Flight flight, secondFlight, unknownFlight;
+	Flight flight, secondFlight, unknownFlight;
 
 	@Before
 	public void setup() {

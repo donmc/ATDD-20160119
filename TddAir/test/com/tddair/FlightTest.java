@@ -24,6 +24,26 @@ public class FlightTest {
 	}
 
 	@Test
+	public void testExceptionThrownLongDestination() {
+		try {
+			new Flight("DAL", "Long", 99, "WN", 113);
+			fail("Should throw IllegalArgumentException");
+		} catch (Exception e) {
+			assertEquals("Invalid destination code", e.getMessage());
+		}
+	}
+
+	@Test
+	public void testExceptionThrownLessThan100Miles() {
+		try {
+			new Flight("DAL", "OKC", 99);
+			fail("Should throw IllegalArgumentException");
+		} catch (Exception e) {
+			assertEquals("Mileage must be greater than 100", e.getMessage());
+		}
+	}
+
+	@Test
 	public void testOriginIsValid() {
 		// setup
 		Flight flight = new Flight("DFW", "SAN", 400, "AA", 1234);
@@ -57,9 +77,21 @@ public class FlightTest {
 	}
 
 	@Test
+	public void testGetFullFlightNumberAirlineNullAndZeroFlightNumber() {
+		// setup
+		Flight flight = new Flight("DFW", "SAN", 400);
+
+		// exercise
+		String flightNumber = flight.getFullFlightNumber();
+
+		// verify
+		assertEquals("UNKNOWN", flightNumber);
+	}
+
+	@Test
 	public void testGetFullFlightNumberWhereNumberZero() {
 		// setup
-		Flight flight = new Flight("DFW", "SAN", 400, null, 0);
+		Flight flight = new Flight("DFW", "SAN", 400, "WN", 0);
 
 		// exercise
 		String flightNumber = flight.getFullFlightNumber();
@@ -122,6 +154,17 @@ public class FlightTest {
 
 		// verify
 		assertEquals("UNKNOWN | DFW -> LAX | 3000 miles", fullFlightInfo);
+	}
+
+	@Test
+	public void testGetters() {
+		Flight flight = new Flight("DFW", "ORD", 923, "AA", 453);
+		String dest = flight.getDestination();
+		int miles = flight.getMileage();
+		String orig = flight.getOrigin();
+		assertEquals(dest, "ORD");
+		assertEquals(orig, "DFW");
+		assert (923 == miles);
 	}
 
 }
