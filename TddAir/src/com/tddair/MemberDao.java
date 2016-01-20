@@ -7,21 +7,17 @@ public class MemberDao {
 
 	private Map<String, Member> members = new HashMap<>();
 	
-	public String registerMember(String username, String email) {
-		String registrationStatus = MemberConstants.REGISTRATION_DUPLICATE;
-			
-		if (!members.containsKey(username)) {
-			Member m = new Member(username, email);
-			members.put(username, m);	
-			
-			registrationStatus = MemberConstants.REGISTRATION_SUCCESSFUL;
-		}
-		
-		return registrationStatus;
+	public void registerMember(String username, String email) {
+		Member member = new Member(username, email);
+		members.put(username, member);
 	}
 
 	public Member getMember(String username) {
 		Member m = members.get(username);
 		return m;
+	}
+
+	public boolean contains(String username) {
+		return members.containsKey(username);
 	}
 }

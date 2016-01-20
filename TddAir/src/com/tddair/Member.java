@@ -1,7 +1,6 @@
 package com.tddair;
 
 public class Member {
-	private int PROMOTIONAL_BONUS_MILES = 10000;
 	
 	String username;
 	String email;
@@ -13,7 +12,7 @@ public class Member {
 		this.username = username;
 		this.email = email;
 		this.status = Status.RED;
-		balance = PROMOTIONAL_BONUS_MILES;
+		balance = MemberConstants.PROMOTIONAL_BONUS_MILES;
 		ytdMiles = 0;
 	}
 	
@@ -31,13 +30,15 @@ public class Member {
 	}
 
 	public int getYtdMiles() {
-		// TODO Auto-generated method stub
 		return ytdMiles;
 	}
 
 	public String getEmail() {
-		// TODO Auto-generated method stub
 		return email;
+	}
+
+	public void completeFlight(Flight flight) {
+		ytdMiles += flight.getMileage();
 	}
 
 }

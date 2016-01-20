@@ -14,10 +14,28 @@ public class TddAirApplication {
 	}
 
 	public String registerAsMember(String username, String email) {
-		return members.registerMember(username, email);
+		
+		String registrationStatus = MemberConstants.REGISTRATION_DUPLICATE;
+		
+		if (!members.contains(username)) {
+			
+			members.registerMember(username, email);
+			
+			registrationStatus = MemberConstants.REGISTRATION_SUCCESSFUL;
+		}
+		
+		return registrationStatus;
 	}
 
 	public Member lookUp(String username) {
 		return members.getMember(username);
+	}
+
+	public Flight getFlight(String flightNumber) {
+		return flights.getFlightBy(flightNumber);
+	}
+
+	public void completeFlight(Member member, Flight flight) {
+		member.completeFlight(flight);
 	}
 }
