@@ -1,3 +1,4 @@
+package com.ttdair;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -34,7 +35,7 @@ public class RegisterFlyer {
 	@Then("^member has \"([^\"]*)\" status$")
 	public void member_has_status(String arg1) throws Throwable {
 		assertNotNull(member);
-		assertEquals(arg1, member.getStatus()); 
+		assertEquals(arg1, member.getStatus().toString()); 
 	}
 
 	@Then("^member has (\\d+) ytdMiles$")
