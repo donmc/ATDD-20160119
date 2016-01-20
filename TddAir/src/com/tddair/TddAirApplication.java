@@ -11,4 +11,14 @@ public class TddAirApplication {
 	public void addFlight(String origin, String destination, int mileage, String airline, int number) {
 		flights.addFlight(origin, destination, mileage, airline, number);
 	}
+
+	public Member lookUpMember(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void registerAsMember(String username, String email) {
+		// TODO Auto-generated method stub
+		
+	}
 }
