@@ -92,10 +92,23 @@ public class WhenCompletingFlights {
 		assertEquals(marty.getStatus(), Status.BLUE);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldHaveBlueStatusTurnGold() {
-		fail("Not yet implemented");
+		Member marty = tddAir.lookUp("martymc");
+		
+		Flight flight = tddAir.getFlight("QF191");
+		int miles = flight.getMileage();
+		for (int total=marty.getYtdMiles(); total < 50000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.BLUE);
+		
+		for (int total=marty.getYtdMiles(); total < 75000; total+=miles) {
+			marty.completeFlight(flight);
+		}
+		
+		assertEquals(marty.getStatus(), Status.GOLD);
 	}
 
 	
