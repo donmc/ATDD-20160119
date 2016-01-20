@@ -12,6 +12,7 @@ public class Member {
 		this.userName = userName;
 		milesBalance = new Integer(0);
 		ytdMiles = new Integer(0);
+		calculateStatus();
 	}
 
 	public String getUserName() {
@@ -19,7 +20,7 @@ public class Member {
 	}
 
 	public Category getStatus() {
-		return Category.Red;
+		return this.status;
 	}
 	
 	public void setStatus(Category status) {
@@ -45,6 +46,7 @@ public class Member {
 
 	public void completeFlight(Flight completedFlight) {
 		addMiles(completedFlight.getMileage());
+		calculateStatus();
 	}
 
 	private void addMiles(int miles)
@@ -52,7 +54,17 @@ public class Member {
 		this.milesBalance = this.milesBalance + miles;
 		this.ytdMiles = this.ytdMiles + miles;
 	}
-
+	private void calculateStatus()
+	{
+		if (ytdMiles <= 25000)
+			status = Category.Red;
+		else if (ytdMiles <=50000)
+			status = Category.Green;
+		else if (ytdMiles <=75000)
+			status = Category.Blue;
+		else if (ytdMiles >75000)
+			status = Category.Golden;
+	}
 	
 
 
