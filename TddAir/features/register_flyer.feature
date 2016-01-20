@@ -8,7 +8,7 @@ Scenario: Happy Path
 #Given a frequent flyer
 When a flyer with username "martym" and email "martymcfly@future.com" registers
 Then system has use with username "martym"
-	And member has "Red" status
+	And member has "RED" status
 	And member has 0 ytdMiles
 	And member has 10000 mile balance
 
