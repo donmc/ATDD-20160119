@@ -11,6 +11,7 @@ public class WhenRegisteringFlyer {
 	private Member member1;
 	private Member member2;
 	private Member missingMember;
+	private TddAirApplication app;
 	
 	@Before
 	public void setup(){
@@ -18,7 +19,7 @@ public class WhenRegisteringFlyer {
 		String username2 = "frankr";
 		String userMissing = "lind";
 		String email = "don@improving.com";
-		TddAirApplication app = new TddAirApplication();
+		app = new TddAirApplication();
 		app.registerAsMember(username, email);
 		app.registerAsMember(username2, email);
 		member2 = app.lookUpMember(username2);
@@ -58,6 +59,19 @@ public class WhenRegisteringFlyer {
 	@Test
 	public void shouldHave10000BonusMilesForBalance(){
 		assertEquals(new Integer(10000), member1.getMilesBalance());
+	}
+	
+	@Test
+	public void shouldNotAllowUserWithSameUserName(){
+		try
+		{
+			app.registerAsMember("donmc", "donmc@gmail.com");
+			fail("Exception should be thrown");
+		}
+		catch(IllegalArgumentException exception)
+		{
+			assertEquals("Duplicate username!", exception.getMessage());
+		}
 	}
 	
 }
