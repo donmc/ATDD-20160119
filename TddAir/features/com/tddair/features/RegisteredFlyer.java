@@ -1,22 +1,35 @@
 package com.tddair.features;
 
+import com.tddair.Member;
+import com.tddair.TddAirApplication;
+
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static org.junit.Assert.*;
+
 public class RegisteredFlyer {
 
+	private TddAirApplication app;
+	
+	public RegisteredFlyer() {
+		super();
+		app= new TddAirApplication();
+	}
+
 @When("^a flyer with username \"([^\"]*)\" and email \"([^\"]*)\" registers$")
-public void a_flyer_with_username_and_email_registers(String arg1, String arg2) throws Throwable {
+public void a_flyer_with_username_and_email_registers(String arg1, String arg2) {
     // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+	app.registerAsMember(arg1, arg2);
 }
 
 @Then("^system has user with username \"([^\"]*)\"$")
-public void system_has_user_with_username(String arg1) throws Throwable {
+public void system_has_user_with_username(String arg1) {
     // Write code here that turns the phrase above into concrete actions
-    throw new PendingException();
+	Member member1 = app.lookUpMember(arg1);
+	assertNotNull(member1);
 }
 
 @Then("^member has \"([^\"]*)\" status$")

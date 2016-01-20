@@ -19,6 +19,7 @@ public class TddAirApplication {
 
 	public void registerAsMember(String username, String email) {
 		Member newMember = new Member(username);
+		newMember.setMilesBalance(new Integer (10000));
 		members.saveMember(newMember);
 	}
 }

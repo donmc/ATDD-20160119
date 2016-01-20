@@ -4,6 +4,7 @@ public class Member {
 
 	private String userName;
 	private Category status;
+	private Integer milesBalance;
 
 	public Member(String userName) {
 		super();
@@ -32,7 +33,11 @@ public class Member {
 
 	public Integer getMilesBalance() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.milesBalance;
+	}
+
+	public void setMilesBalance(Integer milesBalance) {
+		this.milesBalance = milesBalance;
 	}
 
 }

@@ -59,4 +59,5 @@ public class WhenRegisteringFlyer {
 	public void shouldHave10000BonusMilesForBalance(){
 		assertEquals(new Integer(10000), member1.getMilesBalance());
 	}
+	
 }
