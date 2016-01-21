@@ -2,24 +2,29 @@ package com.tddair.constants;
 
 public enum Status {
 	/** Red, [0, 25000) miles */
-	RED("Red", 1, 0, 25000),
+	RED("Red", 1, 0, 25000, 10000, 100.00),
 	/** Green, [25000, 50000) miles */
-	GREEN("Green", 2, 25000, 50000),
+	GREEN("Green", 2, 25000, 50000, 9000, 90.00),
 	/** Blue, [50000, 75000) miles */
-	BLUE("Blue", 3, 50000, 75000),
+	BLUE("Blue", 3, 50000, 75000, 8000, 75.00),
 	/** Golden, [75000, +INF) miles */
-	GOLDEN("Golden", 4, 75000, Integer.MAX_VALUE);
+	GOLDEN("Golden", 4, 75000, Integer.MAX_VALUE, 7000, 60.00);
 	
 	private final String displayName;
 	private final int level;
 	private final int minLevelMiles;
 	private final int maxLevelMiles;
+	private final int upgradeCostWithMiles;
+	private final double upgradeCostWithCC;
 	
-	private Status(String displayName, int level, int minLevelMiles, int maxLevelMiles) {
+	private Status(String displayName, int level, int minLevelMiles, int maxLevelMiles,
+					int upgradeCostWithMiles, double upgradeCostWithCC) {
 		this.displayName = displayName;
 		this.level = level;
 		this.minLevelMiles = minLevelMiles;
 		this.maxLevelMiles = maxLevelMiles;
+		this.upgradeCostWithMiles = upgradeCostWithMiles;
+		this.upgradeCostWithCC = upgradeCostWithCC;
 	}
 
 	public String getDisplayName() {
@@ -44,6 +49,14 @@ public enum Status {
 		return maxLevelMiles;
 	}
 	
+	public int getUpgradeCostWithMiles() {
+		return upgradeCostWithMiles;
+	}
+
+	public double getUpgradeCostWithCC() {
+		return upgradeCostWithCC;
+	}
+
 	public boolean isLowerThan(final Status other) {
 		final boolean lower = (this.getLevel() < other.getLevel());
 		return lower;

@@ -2,6 +2,7 @@ package com.tddair;
 
 import com.tddair.constants.Status;
 import com.tddair.services.CreditCardProcessor;
+import com.tddair.services.exceptions.CardDeclinedException;
 import com.tddair.services.impl.AmericanExpressCreditCardProcessor;
 
 public class Member {
@@ -75,7 +76,7 @@ public class Member {
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
 	
-	public void purchaseUpgradeWithCreditCard(final int qty, final String ccNumber) {
-		throw new UnsupportedOperationException("Not yet implemented");
+	public void purchaseUpgradeWithCreditCard(final int qty, final String ccNumber) throws CardDeclinedException {
+		this.creditCardProcessor.charge(ccNumber, getStatus().getUpgradeCostWithCC());
 	}
 }

@@ -10,7 +10,7 @@ public class FakeCreditCardProcessor implements CreditCardProcessor {
 	@Override
 	public boolean charge(String creditCardNumber, double amount) throws CardDeclinedException {
 		if(amount > chargeLimit) {
-			throw new CardDeclinedException(String.format("Unable to charge $%0.2f", amount));
+			throw new CardDeclinedException(String.format("Unable to charge $%.2f", amount));
 		}
 		return true;
 	}
