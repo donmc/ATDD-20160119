@@ -63,6 +63,11 @@ public class Member {
 	{
 		status = status.getCategoryForMiles(ytdMiles);
 	}
+
+	public int purchaseUpgradeWithMiles(int quantity) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 
