@@ -25,5 +25,5 @@ Scenario: Blue to Gold
 
 Given a member "martymc" and "GREEN" status and 68000 YTD miles
 When member "martymc" completes flight "QF191"
-Then member has status equal to "Gold"
+Then member has status equal to "GOLD"
 

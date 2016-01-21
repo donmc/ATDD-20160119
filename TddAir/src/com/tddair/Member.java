@@ -36,6 +36,14 @@ public class Member {
 	public String getEmail() {
 		return email;
 	}
+	
+	public void setYtdMiles(int miles) {
+		this.ytdMiles = miles;
+	}
+	
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public void completeFlight(Flight flight) {
 		int mileage = flight.getMileage();
@@ -53,7 +61,7 @@ public class Member {
 		ytdMiles += mileage;
 	}
 
-	private void updateStatus() {
+	public void updateStatus() {
 		status = Status.getStatus(ytdMiles);
 	}
 
