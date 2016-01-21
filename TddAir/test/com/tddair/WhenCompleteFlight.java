@@ -18,24 +18,67 @@ public class WhenCompleteFlight {
 	}
 	
 	@Test
-	public void memberSuccessfullyCompletesFlightAndAddsNewMileage() {
+	public void memberSuccessfullyCompletesFlightAndAddsNewMileage() throws FlightNotFoundException {
 		setUpMember(1000, 1000, 500);
 		newMember.completeFlight(completedFlight);
 		assertEquals(new Integer( 1500), newMember.getMilesBalance());
 	}
 	
 	@Test
-	public void memberSuccessfullyCompletesFlightAndAddsNewYtdMileage() {
+	public void memberSuccessfullyCompletesFlightAndAddsNewYtdMileage() throws FlightNotFoundException {
 		setUpMember(1000, 1000, 500);
 		newMember.completeFlight(completedFlight);
 		assertEquals(new Integer( 1500), newMember.getYtdMiles());
 	}
 	
 	@Test
-	public void memberSuccessfullyCompletesFlightAndProgressesFromRedToGreen() {
+	public void memberSuccessfullyCompletesFlightAndProgressesFromRedToGreen() throws FlightNotFoundException {
 		setUpMember(1000, 24000, 1200, Category.Red);
 		newMember.completeFlight(completedFlight);
 		assertEquals(Category.Green, newMember.getStatus());
+	}
+	
+	@Test
+	public void memberSuccessfullyCompletesFlightAndStaysGreen() throws FlightNotFoundException {
+		setUpMember(1000, 26000, 1200, Category.Green);
+		newMember.completeFlight(completedFlight);
+		assertEquals(Category.Green, newMember.getStatus());
+	}
+	
+	@Test
+	public void memberSuccessfullyCompletesFlightAndStaysGreenDespiteSmallYtdMiles() throws FlightNotFoundException {
+		setUpMember(1000, 100, 1200, Category.Green);
+		newMember.completeFlight(completedFlight);
+		assertEquals(Category.Green, newMember.getStatus());
+	}
+	
+	@Test
+	public void memberSuccessfullyCompletesFlightAndProgressesFromGreenToBlue() throws FlightNotFoundException {
+		setUpMember(1000, 49000, 1200, Category.Green);
+		newMember.completeFlight(completedFlight);
+		assertEquals(Category.Blue, newMember.getStatus());
+	}
+	
+	@Test
+	public void memberSuccessfullyCompletesFlightAndProgressesFromBlueToGolden() throws FlightNotFoundException {
+		setUpMember(1000, 74000, 1200, Category.Blue);
+		newMember.completeFlight(completedFlight);
+		assertEquals(Category.Golden, newMember.getStatus());
+	}
+	
+	@Test
+	public void memberSuccessfullyCompletesFlightWithNullFlight() {
+		setUpMember(1000, 74000, 1200, Category.Blue);
+		try
+		{
+			newMember.completeFlight(null);
+			fail("Exception not thrown");
+		}
+		catch(FlightNotFoundException exception)
+		{
+			assertEquals("No flight found", exception.getMessage());
+		}
+		
 	}
 	
 	private void setUpMember(Integer currentMiles, Integer ytdMiles, int flightMiles, Category status)

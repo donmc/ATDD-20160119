@@ -6,13 +6,15 @@ public class Member {
 	private Category status;
 	private Integer milesBalance;
 	private Integer ytdMiles;
+	
+	
 
 	public Member(String userName) {
 		super();
 		this.userName = userName;
 		milesBalance = new Integer(0);
 		ytdMiles = new Integer(0);
-		calculateStatus();
+		status = Category.Red;
 	}
 
 	public String getUserName() {
@@ -44,7 +46,7 @@ public class Member {
 		this.milesBalance = milesBalance;
 	}
 
-	public void completeFlight(Flight completedFlight) {
+	public void completeFlight(Flight completedFlight) throws FlightNotFoundException{
 		addMiles(completedFlight.getMileage());
 		calculateStatus();
 	}
@@ -56,14 +58,7 @@ public class Member {
 	}
 	private void calculateStatus()
 	{
-		if (ytdMiles <= 25000)
-			status = Category.Red;
-		else if (ytdMiles <=50000)
-			status = Category.Green;
-		else if (ytdMiles <=75000)
-			status = Category.Blue;
-		else if (ytdMiles >75000)
-			status = Category.Golden;
+		status = status.getCategoryForMiles(ytdMiles);
 	}
 	
 
