@@ -10,7 +10,7 @@ public class WhenPurchasingSeatUpgrades {
 	private Member purchaser;
 
 	@Test
-	public void shouldPurchaseUpgradeWithMiles() {
+	public void shouldPurchaseUpgradeWithMiles_Red() {
 		setUpMember(Category.Red, 11000);
 		int purchasedUpgrades = purchaser.purchaseUpgradeWithMiles(1);
 		assertEquals(1, purchasedUpgrades);
@@ -45,11 +45,34 @@ public class WhenPurchasingSeatUpgrades {
 		assertEquals(new Integer(2), purchaser.getUpgrades());
 		assertEquals(Category.Green, purchaser.getStatus());
 	}
-		
-	@Ignore
+	
 	@Test
-	public void shouldPurchaseanUpgradeWithCreditCard() {
-		fail("Not yet implemented");
+	public void shouldPurchaseUpgradeWithMiles_Blue() {
+		setUpMember(Category.Blue, 9000);
+		int purchasedUpgrades = purchaser.purchaseUpgradeWithMiles(1);
+		assertEquals(1, purchasedUpgrades);
+		assertEquals(new Integer(1000), purchaser.getMilesBalance());
+		assertEquals(new Integer(1), purchaser.getUpgrades());
+		assertEquals(Category.Blue, purchaser.getStatus());
+	}
+	
+	@Test
+	public void shouldPurchaseUpgradeWithMiles_Golden() {
+		setUpMember(Category.Golden, 9000);
+		int purchasedUpgrades = purchaser.purchaseUpgradeWithMiles(1);
+		assertEquals(1, purchasedUpgrades);
+		assertEquals(new Integer(2000), purchaser.getMilesBalance());
+		assertEquals(new Integer(1), purchaser.getUpgrades());
+		assertEquals(Category.Golden, purchaser.getStatus());
+	}
+		
+	@Test
+	public void shouldPurchaseanUpgradeWithCreditCard_Red() {
+		setUpMember(Category.Red, 11000);
+		int purchasedUpgrades = purchaser.purchaseUpgradeWithCreditCard(1, "9999111155558888");
+		assertEquals(1, purchasedUpgrades);
+		assertEquals(new Integer(1000), purchaser.getMilesBalance());
+		assertEquals(new Integer(1), purchaser.getUpgrades());
 	}
 	
 	@Ignore

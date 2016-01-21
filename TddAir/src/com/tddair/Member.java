@@ -66,7 +66,7 @@ public class Member {
 
 	public int purchaseUpgradeWithMiles(int quantity) {
 		// TODO Auto-generated method stub
-		int cost = quantity *10000;
+		int cost = quantity * status.getUpgradePurchasePrice();
 		if (cost < milesBalance )
 		{
 		  this.upgrades = this.upgrades + quantity;
@@ -80,6 +80,11 @@ public class Member {
 
 	public Integer getUpgrades() {
 		return upgrades;
+	}
+
+	public int purchaseUpgradeWithCreditCard(int quantity, String token) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }
