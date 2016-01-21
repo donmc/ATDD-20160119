@@ -10,10 +10,15 @@ public class CASSpy implements CAS {
 	
 	@Override
 	public boolean processTransaction(String creditCardNumber, BigDecimal amount) {
-		transactionCount++;
-		transactionAmount = amount;
+		boolean transactionProcessed = false;
 		
-		return true;
+		if (creditCardNumber.length() >= 15) {
+			transactionCount++;
+			transactionAmount = amount;
+			transactionProcessed = true;
+		}		
+		
+		return transactionProcessed;
 	}
 
 	@Override

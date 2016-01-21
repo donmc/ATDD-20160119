@@ -58,21 +58,31 @@ public class WhenPurchasingSeatUpgrades {
 	
 	@Test
 	public void shouldPurchaseUpgradeWithCC() {
-		CAS spy = new CASSpy();
-		member.setCreditAuthroizationSystem(spy);
+		/*CAS spy = new CASSpy();
+		member.setCreditAuthroizationSystem(spy);*/
 		boolean purchasedUpgrade = member.purchaseUpgradeWithCC(1, "1234567890123456");
 		
 		
 		assertEquals(member.getUpgradeCount(), 1);
 		assertTrue(purchasedUpgrade);
 		
+		CAS spy = TransactionProcessor.getInstance();
 		assertEquals(spy.getTransactionCount(), 1);
 		assertEquals(spy.getTransactionCost(), BigDecimal.valueOf(100));
 	}
 	
-	@Ignore
 	@Test
 	public void shouldNotPurchaseUpgradeWithInvalidCC() {
-		fail("Not yet implemented");
+		/*CAS spy = new CASSpy();
+		member.setCreditAuthroizationSystem(spy);*/
+		boolean purchasedUpgrade = member.purchaseUpgradeWithCC(1, "12345678901234");
+		
+		
+		assertEquals(member.getUpgradeCount(), 0);
+		assertFalse(purchasedUpgrade);
+		
+		CAS spy = TransactionProcessor.getInstance();
+		assertEquals(spy.getTransactionCount(), 0);
+		assertEquals(spy.getTransactionCost(), BigDecimal.ZERO);
 	}
 }

@@ -10,7 +10,6 @@ public class Member {
 	int balance;
 	int ytdMiles;
 	int upgradeCount;
-	private CAS cas;
 	
 	public Member(String username, String email) {
 		this.username = username;
@@ -89,14 +88,10 @@ public class Member {
 		return upgradeCount;
 	}
 
-	public void setCreditAuthroizationSystem(CAS cas) {
-		this.cas = cas;
-	}
-
 	public boolean purchaseUpgradeWithCC(int numberUpgradesToPurchase, String ccNumber) {
 		BigDecimal upgradeCostInDollars = status.getUpgradeCostInDollars().multiply(BigDecimal.valueOf(numberUpgradesToPurchase));
 		
-		boolean isPurchaseSuccessful = cas.processTransaction(ccNumber, upgradeCostInDollars);
+		boolean isPurchaseSuccessful = TransactionProcessor.getInstance().processTransaction(ccNumber, upgradeCostInDollars);
 		if (isPurchaseSuccessful) {
 			upgradeCount += numberUpgradesToPurchase;
 		}
