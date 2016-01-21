@@ -23,7 +23,7 @@ public class RegisteredFlyer {
 		}
 		catch (IllegalArgumentException e)
 		{
-			dataHolder.setDuplicateMessage(e.getMessage());
+			dataHolder.setExceptionMessage(e.getMessage());
 		}
 	}
 

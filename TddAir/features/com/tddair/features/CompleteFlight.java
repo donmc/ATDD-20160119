@@ -3,6 +3,7 @@ package com.tddair.features;
 import static org.junit.Assert.assertEquals;
 
 import com.tddair.Category;
+import com.tddair.FlightNotFoundException;
 import com.tddair.Member;
 
 import cucumber.api.PendingException;
@@ -28,11 +29,16 @@ public class CompleteFlight {
 	}
 	
 	@When("^member completes flight \"([^\"]*)\"$")
-	public void member_completes_flight(String flightNumber) throws Throwable {
-		dataHolder.getApp().completeFlight(flightNumber, dataHolder.getMember1());
+	public void member_completes_flight(String flightNumber) {
+		try{
+			dataHolder.getApp().completeFlight(flightNumber, dataHolder.getMember1());
+		}
+		catch(FlightNotFoundException exception)
+		{
+			dataHolder.setExceptionMessage(exception.getMessage());
+		}
 		
-		// Write code here that turns the phrase above into concrete actions
-	    throw new PendingException();
+		
 	}
 
 

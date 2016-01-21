@@ -45,7 +45,7 @@ public class CucumberSharedDataHolder {
 		return duplicateMessage;
 	}
 
-	public void setDuplicateMessage(String duplicateMessage) {
+	public void setExceptionMessage(String duplicateMessage) {
 		this.duplicateMessage = duplicateMessage;
 	}
 	

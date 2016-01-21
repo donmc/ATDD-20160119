@@ -22,4 +22,9 @@ public class TddAirApplication {
 		newMember.setMilesBalance(new Integer (10000));
 		members.saveMember(newMember);
 	}
+
+	public void completeFlight(String flightNumber, Member member) throws FlightNotFoundException {
+		member.completeFlight(flights.getFlightBy(flightNumber));
+		
+	}
 }
