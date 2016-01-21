@@ -119,10 +119,26 @@ public class WhenRegisteringFlyer {
 	}
 	
 	@Test
-	public void shouldReturnErrorWhenRegisteringWithNullOrEmptyUser()
+	public void shouldReturnErrorWhenRegisteringWithEmptyUser()
 	{
 		TddAirApplication app = new TddAirApplication();
 		String userName = "";
+		String email = "user1234@yahoo.com";
+		
+		try {
+			app.registerAsMember(userName, email);
+			fail();
+			
+		} catch (Exception e) {
+			assertEquals("User Name can not be null or Empty!!", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldReturnErrorWhenRegisteringWithNullUser()
+	{
+		TddAirApplication app = new TddAirApplication();
+		String userName = null;
 		String email = "user1234@yahoo.com";
 		
 		try {

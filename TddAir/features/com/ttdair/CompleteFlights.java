@@ -28,26 +28,26 @@ public class CompleteFlights {
 	}
 
 	@When("^member \"([^\"]*)\" completes flight \"([^\"]*)\"$")
-	public void member_completes_flight(String arg1, String arg2) throws Throwable {
+	public void member_completes_flight(String userName, String flightNumber) throws Throwable {
 		
-		app.completeFlight(MemberDB.getMemberDB().getMember(arg1).getUserName(), arg2);
+		app.completeFlight(MemberDB.getMemberDB().getMember(userName).getUserName(), flightNumber);
 	}
 	
 	@Then("^member \"([^\"]*)\" has \"([^\"]*)\" status$")
-	public void member_has_status(String arg1, MemberStatus arg2) throws Throwable {
+	public void member_has_status(String userName, MemberStatus status) throws Throwable {
 	    
-		assertEquals(MemberDB.getMemberDB().getMember(arg1).getStatus(), arg2);	
+		assertEquals(MemberDB.getMemberDB().getMember(userName).getStatus(), status);	
 	}
 
 	@Then("^member \"([^\"]*)\" has (\\d+) ytdMiles$")
-	public void member_has_ytdMiles(String arg1, int arg2) throws Throwable {
+	public void member_has_ytdMiles(String userName, int ytdMiles) throws Throwable {
 		
-		assertEquals(MemberDB.getMemberDB().getMember(arg1).getYtdMiles(), arg2);	
+		assertEquals(MemberDB.getMemberDB().getMember(userName).getYtdMiles(), ytdMiles);	
 	}
 
 	@Then("^member \"([^\"]*)\" has (\\d+) miles balance$")
-	public void member_has_miles_balance(String arg1, int arg2) throws Throwable {
+	public void member_has_miles_balance(String userName, int balance) throws Throwable {
 		
-		assertEquals(MemberDB.getMemberDB().getMember(arg1).getBalanceMiles(), arg2);	
+		assertEquals(MemberDB.getMemberDB().getMember(userName).getBalanceMiles(), balance);	
 	}
 }

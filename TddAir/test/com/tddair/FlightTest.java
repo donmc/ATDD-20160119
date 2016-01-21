@@ -1,8 +1,8 @@
 package com.tddair;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class FlightTest {
@@ -19,7 +19,7 @@ public class FlightTest {
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void testExceptionThrownWithInvalidMilage() {
-		new Flight("Dallas", "DFW", -1234);
+		new Flight("DFW", "DFW", -1234);
 	}
 	
 	@Test
@@ -27,7 +27,7 @@ public class FlightTest {
 
 		try {
 			new Flight("DFW", null, 1234);
-			fail("should throuw Exception from line above !!");
+			fail("should throw Exception from line above !!");
 		} catch (IllegalArgumentException e) {
 
 			assertEquals("Invalid destination code", e.getMessage());
@@ -35,10 +35,17 @@ public class FlightTest {
 
 	}
 	
-	@Ignore
 	@Test
-	public void testFlightStringStringInt() {
-		fail("Not yet implemented");
+	public void testExceptionThrownWithInvalidDestination() {
+
+		try {
+			new Flight("DFW", "SAN FRANCISCO", 1234);
+			fail("should throw Exception from line above !!");
+		} catch (IllegalArgumentException e) {
+
+			assertEquals("Invalid destination code", e.getMessage());
+		}
+
 	}
 
 	@Test
@@ -57,10 +64,25 @@ public class FlightTest {
 	}
 	
 	@Test
-	public void testGetFullFlightNumber_NoFlightNo() {
+	public void testGetFullFlightNumber_NoFlightName() {
 		
 		//setup
 		Flight flight = new Flight("DFW", "SAN", 400, null, 1234);
+		
+		//exercise 
+		String fullFlightNumber = flight.getFullFlightNumber();	
+		
+		//verify
+		assertEquals("UNKNOWN", fullFlightNumber);
+		
+		//tear down 
+	}
+	
+	@Test
+	public void testGetFullFlightNumber_NoFlightNumber() {
+		
+		//setup
+		Flight flight = new Flight("DFW", "SAN", 400, "AA", 0);
 		
 		//exercise 
 		String fullFlightNumber = flight.getFullFlightNumber();	
@@ -97,6 +119,21 @@ public class FlightTest {
 		
 		//verify
 		assertEquals("WN2311 | MIA -> LAX | 3000", fullFlightInfo);
+		
+		//tear down 
+	}
+	
+	@Test
+	public void testGetFullFlightInfoForUnknownFlights() {
+		
+		//setup
+		Flight flight = new Flight("MIA", "LAX", 3000);
+		
+		//exercise 
+		String fullFlightInfo = flight.getInfo();	
+		
+		//verify
+		assertEquals("UNKNOWN | MIA -> LAX | 3000", fullFlightInfo);
 		
 		//tear down 
 	}
