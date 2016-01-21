@@ -1,8 +1,5 @@
 package com.tddair;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public enum Category {
 	Red(25000),
 	Green(50000),
