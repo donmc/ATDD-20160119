@@ -38,7 +38,7 @@ public class Member {
 		}
 		
 		milesBalance -= costOfUpgrades;
-		upgrades += numberOfUpgrades;
+		incrementUpgrades(numberOfUpgrades);
 		
 	}
 	
@@ -49,6 +49,10 @@ public class Member {
 		if(!approved) {
 			throw new CreditNotApprovedException("Insufficient credit");
 		}
+		incrementUpgrades(numberOfUpgrades);
+	}
+
+	private void incrementUpgrades(int numberOfUpgrades) {
 		upgrades += numberOfUpgrades;
 	}
 

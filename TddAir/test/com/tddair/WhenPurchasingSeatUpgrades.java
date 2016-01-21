@@ -3,7 +3,6 @@ package com.tddair;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class WhenPurchasingSeatUpgrades {
@@ -37,11 +36,17 @@ public class WhenPurchasingSeatUpgrades {
 		assertEquals(3, member.getUpgrades());
 	}
 	
-	@Test(expected=InsuffiecentMilesException.class)
+	@Test
 	public void shouldNotPurchaseUpgradeWithInsufficientMiles() {
-		member.setMilesBalance(5000);
-		member.setStatus(Status.Blue);
-		member.purchaseUpgrade(1);
+		try {
+			member.setMilesBalance(5000);
+			member.setStatus(Status.Blue);
+			member.purchaseUpgrade(1);
+		} catch (Exception e) {
+			assertEquals(InsuffiecentMilesException.class.getName(), e.getClass().getName());
+			assertEquals(0, member.getUpgrades());
+			assertEquals(5000, member.getMilesBalance());
+		}
 	}
 	
 	@Test
@@ -74,22 +79,40 @@ public class WhenPurchasingSeatUpgrades {
 		assertEquals(1750, credsys.getAvailableBalance());
 	}
 	
-	@Test(expected=InvalidCreditCardNumberException.class)
+	@Test
 	public void shouldNotPurchaseUpgradeWithInvalidCreditCard() {
-		CreditSystem credsys = new CreditSystemSpy(2500);
-		member.setCreditSystem(credsys);
-		member.setStatus(Status.Blue);
-		
-		member.purchaseUpgrade(1, "1234");
+		CreditSystem credsys = null;
+		try {
+			credsys = new CreditSystemSpy(2500);
+			member.setCreditSystem(credsys);
+			member.setStatus(Status.Blue);
+			
+			member.purchaseUpgrade(1, "1234");
+		} catch (Exception e) {
+			assertEquals(InvalidCreditCardNumberException.class.getName(), e.getClass().getName());
+			assertEquals(0, member.getUpgrades());
+			assertEquals(10000, member.getMilesBalance());
+			assertEquals(0, credsys.getAmountProcessed());
+			assertEquals(2500, credsys.getAvailableBalance());
+		}
 	}
 	
-	@Test(expected=InsuffiecentAvailableBalanceException.class)
+	@Test
 	public void shouldNotPurchaseUpgradeWithInsufficientAvailableCredit() {
-		CreditSystem credsys = new CreditSystemSpy(500);
-		member.setCreditSystem(credsys);
-		member.setStatus(Status.Red);
-		
-		member.purchaseUpgrade(1000, "123456789875216");
+		CreditSystem credsys = null;
+		try {
+			credsys = new CreditSystemSpy(2500);
+			member.setCreditSystem(credsys);
+			member.setStatus(Status.Red);
+			
+			member.purchaseUpgrade(1000, "123456789875216");
+		} catch (Exception e) {
+			assertEquals(InsuffiecentAvailableBalanceException.class.getName(), e.getClass().getName());
+			assertEquals(0, member.getUpgrades());
+			assertEquals(10000, member.getMilesBalance());
+			assertEquals(0, credsys.getAmountProcessed());
+			assertEquals(2500, credsys.getAvailableBalance());
+		}
 	}
 
 }
