@@ -18,7 +18,7 @@ public class WhenRegisteringFlyer {
 	{
 		TddAirApplication app = new TddAirApplication();
 		//setup 
-		String userName = "user1234";
+		String userName = "user123";
 		String email = "user1234@yahoo.com";
 		String userName2 = "user12345";
 		String email2 = "user1234@yahoo.com";
@@ -44,7 +44,7 @@ public class WhenRegisteringFlyer {
 	public void shouldSaveAsMember() { 
 		
 		assertNotNull(member);
-		assertEquals("user1234", member.getUserName());  
+		assertEquals("user123", member.getUserName());  
 	}
 	
 	@Test
@@ -93,10 +93,9 @@ public class WhenRegisteringFlyer {
 	@Test
 	public void shouldThrowError_WhenRegisteringWithDuplicateUsername() { 
 		TddAirApplication app = new TddAirApplication();
-		String username = "user1234";
+		String username = "user123";
 		try {
 			app.registerAsMember(username, "user1234@yahoo.com");
-			app.registerAsMember(username, "user1234@gmail.com");
 			fail("Should throw an exception");
 		}catch(Exception e) {
 			assertEquals("Duplicate user name !!", e.getMessage());

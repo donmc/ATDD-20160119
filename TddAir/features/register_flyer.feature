@@ -8,9 +8,9 @@ Scenario: Happy Path
 When a flyer with username "user1234" and email "user1234@yahoo.com" register
 
 Then system has user with username "user1234"
-And member has "RED" status 
-And member has 0 ytdMiles 
-And member has 10000 miles balance 
+And member "user1234" has "RED" status 
+And member "user1234" has 0 ytdMiles 
+And member "user1234" has 10000 miles balance 
 
 Scenario: Duplicate User Name  
 

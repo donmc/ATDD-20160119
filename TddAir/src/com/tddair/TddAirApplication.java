@@ -4,7 +4,6 @@ package com.tddair;
 public class TddAirApplication {
 	
 	private FlightDao flights = new FlightDao();
-	private Member member;
 	
 	public TddAirApplication() {
 	}
@@ -26,7 +25,7 @@ public class TddAirApplication {
 			throw new Exception("Invalid Email format !!");
 		}
 		
-		member = new Member(userName, email);
+		Member member = new Member(userName, email);
 		member.setStatus(MemberStatus.RED);
 		member.setBalanceMiles(10000);
 		member.setYtdMiles(0);
