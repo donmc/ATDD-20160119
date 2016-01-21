@@ -59,4 +59,20 @@ public enum Status {
 		
 		throw new IllegalArgumentException("No Status found named '" + displayName + "'");
 	}
+
+	public static Status upgradeStatus(Status currentStatus, int currentYTDBalance) {
+		Status upgradeStatus;
+		
+		if (currentYTDBalance >= Status.GOLDEN.getMinLevelMiles()) {
+			upgradeStatus = Status.GOLDEN;
+		} else if (currentYTDBalance >= Status.BLUE.getMinLevelMiles()) {
+			upgradeStatus = Status.BLUE;
+		} else if (currentYTDBalance >= Status.GREEN.getMinLevelMiles()) {
+			upgradeStatus = Status.GREEN;
+		} else {
+			upgradeStatus = currentStatus;
+		}
+		
+		return upgradeStatus;
+	}
 }
