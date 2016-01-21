@@ -1,36 +1,18 @@
 Feature: Complete Flight
-As a frequent flyer
-I want completed flight mileage recorded
-So that I can accumulate miles and increase status
+  As a frequent flyer
+  I want completed flight mileage recorded
+  So that I can accumulate miles and increase status
 
-Scenario: Red to Green
+  Scenario Outline: Blue to Golden
+    Given member is <Start Status> status with <Start YtdMiles> ytdMiles and <Start Miles> miles balance
+    When the member completes a flight of <Flying Miles> miles
+    Then member status should be <End Status>
+    And member should have <End YtdMiles> ytdMiles
+    And member should have <End Miles> miles balance
 
-Given member is "Red" status with 0 ytdMiles and 0 miles balance
-When the member completes a flight of 25000 miles
-Then member status should be "Green"
-And member should have 25000 ytdMiles
-And member should have 25000 miles balance
-
-Scenario: Green to Green
-
-Given member is "Green" status with 25000 ytdMiles and 25000 miles balance
-When the member completes a flight of 100 miles
-Then member status should be "Green"
-And member should have 25100 ytdMiles
-And member should have 25100 miles balance
-
-Scenario: Green to Blue
-
-Given member is "Green" status with 25000 ytdMiles and 25000 miles balance
-When the member completes a flight of 25000 miles
-Then member status should be "Blue"
-And member should have 50000 ytdMiles
-And member should have 50000 miles balance
-
-Scenario: Blue to Golden
-
-Given member is "Blue" status with 50000 ytdMiles and 50000 miles balance
-When the member completes a flight of 25000 miles
-Then member status should be "Golden"
-And member should have 75000 ytdMiles
-And member should have 75000 miles balance
+    Examples: 
+      | Start Status | Start YtdMiles | Start Miles | Flying Miles | End Status | End YtdMiles | End Miles |
+      | "Red"        | 0              | 0           | 25000        | "Green"    | 25000        | 25000     |
+      | "Green"      | 25000          | 25000       | 100          | "Green"    | 25100        | 25100     |
+      | "Green"      | 25000          | 25000       | 25000        | "Blue"     | 50000        | 50000     |
+      | "Blue"       | 50000          | 50000       | 25000        | "Golden"   | 75000        | 75000     |

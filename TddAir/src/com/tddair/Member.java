@@ -1,11 +1,15 @@
 package com.tddair;
 
+import com.tddair.exception.InsufficientFundException;
+
 public class Member {
 	private String username;
 	private String email;
 	private Status status = Status.Red;
 	private int ytdMiles = 0;
 	private int miles = 10000;
+	private int upgrade = 0;
+	private CAS cas;
 
 	public Member(String username, String email) {
 		this.username = username;
@@ -45,17 +49,31 @@ public class Member {
 	public void completeFlight(Flight flight) {
 		addFlightMiles(flight.getMileage());
 		
-		if(25000 <= ytdMiles && ytdMiles < 50000)
+		status = status.calculateStatus(ytdMiles);
+	}
+
+	public void purchaseUpgrade(int i) {
+		if(this.miles >= (this.status.getUpgradeCost() * i))
 		{
-			status = Status.Green;
-		} 
-		else if(50000 <= ytdMiles && ytdMiles < 75000)
-		{
-			status = Status.Blue;
+			this.upgrade += i;
+			this.miles -= (this.status.getUpgradeCost() * i);
 		}
-		else if(75000 <= ytdMiles )
+		else
 		{
-			status = Status.Golden;
+			throw new InsufficientFundException();
 		}
+	}
+
+	public Object getUpgrade() {
+		return upgrade;
+	}
+
+	public void purchaseUpgradeWithCC(int numOfUpgrades, String ccNum) {
+		this.upgrade += numOfUpgrades;
+		cas.approve(ccNum, status.getUpgradeDollarCost() * numOfUpgrades);
+	}
+	
+	public void setCAS(CAS cas){
+		this.cas = cas;
 	}
 }

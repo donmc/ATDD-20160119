@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TddAirApplication {
+
 	
 	private FlightDao flights = new FlightDao();
 	private Map<String, Member> memberMap = new HashMap<>();
