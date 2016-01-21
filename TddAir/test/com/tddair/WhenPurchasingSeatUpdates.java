@@ -42,10 +42,13 @@ public class WhenPurchasingSeatUpdates {
 				endingBalance, 0);
 	}
 	
-	@Ignore
 	@Test
-	public void shouldPurchaseThreeUpgradesWithBalance() {
-		fail("Not yet implemented");
+	public void shouldPurchaseThreeUpgradesWithBalance() throws InsufficientBalanceException {
+		final int startingBalance = 30000;
+		final Member redMember = new Member("redMember", "red@example.com", 
+				Status.RED, startingBalance, 0);
+		
+		redMember.purchaseUpgrade(3);
 	}
 	
 	@Test(expected=InsufficientBalanceException.class)

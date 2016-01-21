@@ -81,7 +81,13 @@ public class Member {
 	 *             purchase
 	 */
 	public void purchaseUpgrade(final int qty) throws InsufficientBalanceException {
-		return;
+		final int costEach = getStatus().getUpgradeCostWithMiles();
+		final int currentBalance = getRewardBalance();
+		final int totalCost = costEach * qty;
+		
+		if (currentBalance < totalCost) throw new InsufficientBalanceException();
+		
+		setRewardsBalance(currentBalance - totalCost);
 	}
 	
 	public void purchaseUpgradeWithCreditCard(final int qty, final String ccNumber) throws CardDeclinedException {
