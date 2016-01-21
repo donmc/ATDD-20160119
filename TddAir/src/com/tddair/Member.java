@@ -7,6 +7,7 @@ public class Member {
 	private Status status;
 	private int milesBalance;
 	private int ytdMiles;
+	private int upgrades;
 
 	public Member(String username, String email) {
 		this.username = username;
@@ -14,18 +15,28 @@ public class Member {
 		this.status = Status.Red;
 		this.milesBalance = 10000;
 		this.ytdMiles = 0;
+		this.upgrades = 0;
 	}
 	
 	public void completeFlight(Flight flight) {
-		this.ytdMiles += flight.getMileage();
+		updateBalances(flight);
 		
-		if(ytdMiles >= 75000) {
-			status = Status.Golden;
-		} else if(ytdMiles >= 50000  && this.status.ordinal() < Status.Blue.ordinal()) {
-			status = Status.Blue;
-		} else if(ytdMiles >= 25000 && this.status.ordinal() < Status.Green.ordinal()) {
-			status = Status.Green;
+		if(!(ytdMiles < status.statusThreshold))
+		{
+			this.status = status.getStatus(this.ytdMiles);	
 		}
+	}
+	
+	//From Miles
+	//Miles -= amount * number Of Upgrades
+	public void purchaseUpgrade(int numberOfUpgrades)
+	{
+		
+	}
+	
+	public void purchaseUpgrade(int numberOfUpgrades, String ccNumber)
+	{
+		
 	}
 
 	public String getUserName() {
@@ -50,6 +61,12 @@ public class Member {
 
 	public void setYtdMiles(int ytdMiles) {
 		this.ytdMiles = ytdMiles;
+	}
+	
+	private void updateBalances(Flight flight)
+	{
+		ytdMiles += flight.getMileage();
+		milesBalance += flight.getMileage();
 	}
 
 	

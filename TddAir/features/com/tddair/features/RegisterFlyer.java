@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.tddair.DuplicateMemberException;
 import com.tddair.Member;
+import com.tddair.Status;
 import com.tddair.TddAirApplication;
 
 import cucumber.api.java.en.Then;
@@ -33,7 +34,7 @@ public class RegisterFlyer {
 
 	@Then("^member has \"([^\"]*)\" status$")
 	public void member_has_status(String arg1) throws Throwable {
-		assertEquals(arg1, member.getStatus());
+		assertEquals(Status.valueOf(arg1), member.getStatus());
 	}
 
 	@Then("^member has (\\d+) ytdMiles$")
