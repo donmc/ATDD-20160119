@@ -15,6 +15,10 @@ public class MemberDB {
 	
 	public static MemberDB getMemberDB()
 	{
+		if(instance == null )
+		{
+			instance = new MemberDB();
+		}
 		return instance;
 	}
 	
