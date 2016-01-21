@@ -1,5 +1,7 @@
 package com.tddair;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
@@ -7,11 +9,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.tddair.constants.Status;
+import com.tddair.exceptions.DuplicateUserNameException;
+import com.tddair.exceptions.InsufficientBalanceException;
 import com.tddair.services.exceptions.CardDeclinedException;
 import com.tddair.services.impl.FakeCreditCardProcessor;
 
 public class WhenPurchasingSeatUpdates {
-	
 	private TddAirApplication app;
 	private FakeCreditCardProcessor ccProcessor;
 
@@ -19,39 +22,67 @@ public class WhenPurchasingSeatUpdates {
 	public void setup() throws Exception {
 		this.app = new TddAirApplication();
 		
-		final Member test1 = new Member("test1", "test1@example.com", Status.RED, 0, 0);
+		final Member newRedMember = new Member("newRedMember", "red@example.com", Status.RED, 0, 0);
 		
 		this.ccProcessor = new FakeCreditCardProcessor();
-		test1.setCreditCardProcessor(this.ccProcessor);
+		newRedMember.setCreditCardProcessor(this.ccProcessor);
 		
-		app.getMemberDAO().add(test1);
+		app.getMemberDAO().add(newRedMember);
 	}
 	
-	@Ignore
 	@Test
-	public void shouldPurchaseUpgradesWithBalance() {
-		fail("Not yet implemented");
+	public void shouldPurchaseUpgradesWithBalance() throws Exception {
+		final int startingBalance = 10000;
+		final Member redMember = new Member("redMember", "red@example.com", 
+				Status.RED, startingBalance, 0);
+		
+		redMember.purchaseUpgrade(1);
+		final int endingBalance = redMember.getRewardBalance();
+		assertEquals("Member was charged the wrong number of points", 
+				endingBalance, 0);
 	}
 	
 	@Ignore
 	@Test
 	public void shouldPurchaseThreeUpgradesWithBalance() {
-		
-	}
-	
-	@Ignore
-	@Test
-	public void shouldNotPurchaseUpdatesWithInsufficientBalance() {
 		fail("Not yet implemented");
 	}
+	
+	@Test(expected=InsufficientBalanceException.class)
+	public void shouldNotPurchaseUpdatesWithInsufficientBalance() throws Exception {
+		final int startingBalance = 9999;
+		final Member redMember = new Member("redMember", "red@example.com", 
+				Status.RED, startingBalance, 0);
+		
+		redMember.purchaseUpgrade(1);
+	}
+	
+	@Test
+	public void failedPurchaseShouldNotDeductPoints() throws Exception {
+		final int startingBalance = 9999;
+		final Member redMember = new Member("redMember", "red@example.com", 
+				Status.RED, startingBalance, 0);
+		
+		boolean threwException = false;
+		try {
+			redMember.purchaseUpgrade(1);
+		} catch (Exception e) {
+			threwException = true;
+		}
+		assertTrue("Purchase should have failed", threwException);
+		
+		assertEquals("Member should not have been charged reward miles", 
+				redMember.getRewardBalance(), startingBalance);
+	}
+	
 
 	@Test
-	public void shouldPurchaseUpgradeWithCC() throws CardDeclinedException {
+	public void shouldPurchaseUpgradeWithCC() throws Exception {
 		// $100.00 is the cost of RED fees
 		this.ccProcessor.setChargeLimit(100.00);
 		
-		final Member test1 = app.lookUpMember("test1");
-		test1.purchaseUpgradeWithCreditCard(1, "1111222233334444");
+		final Member redMember = app.lookUpMember("newRedMember");
+		redMember.purchaseUpgradeWithCreditCard(1, "1111222233334444");
 	}
 	
 	@Test(expected=CardDeclinedException.class)
@@ -59,8 +90,8 @@ public class WhenPurchasingSeatUpdates {
 		// $1.00 is lower than fees, regardless of level
 		this.ccProcessor.setChargeLimit(1.00);
 		
-		final Member test1 = app.lookUpMember("test1");
-		test1.purchaseUpgradeWithCreditCard(1, "1111222233334444");
+		final Member redMember = app.lookUpMember("newRedMember");
+		redMember.purchaseUpgradeWithCreditCard(1, "1111222233334444");
 	}
 	
 	@Test(expected=CardDeclinedException.class)
@@ -68,7 +99,7 @@ public class WhenPurchasingSeatUpdates {
 		// $100.00 is the cost of RED fees
 		this.ccProcessor.setChargeLimit(100.00);
 		
-		final Member test1 = app.lookUpMember("test1");
-		test1.purchaseUpgradeWithCreditCard(3, "1111222233334444");
+		final Member redMember = app.lookUpMember("newRedMember");
+		redMember.purchaseUpgradeWithCreditCard(3, "1111222233334444");
 	}
 }

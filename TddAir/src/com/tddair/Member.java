@@ -1,6 +1,7 @@
 package com.tddair;
 
 import com.tddair.constants.Status;
+import com.tddair.exceptions.InsufficientBalanceException;
 import com.tddair.services.CreditCardProcessor;
 import com.tddair.services.exceptions.CardDeclinedException;
 import com.tddair.services.impl.AmericanExpressCreditCardProcessor;
@@ -72,11 +73,20 @@ public class Member {
 		this.creditCardProcessor = creditCardProcessor;
 	}
 	
-	public void purchaseUpgrade(final int qty) {
-		throw new UnsupportedOperationException("Not yet implemented");
+	/**
+	 * 
+	 * @param qty
+	 * @throws InsufficientBalanceException
+	 *             If the member does not have enough points for the given
+	 *             purchase
+	 */
+	public void purchaseUpgrade(final int qty) throws InsufficientBalanceException {
+		return;
 	}
 	
 	public void purchaseUpgradeWithCreditCard(final int qty, final String ccNumber) throws CardDeclinedException {
-		this.creditCardProcessor.charge(ccNumber, getStatus().getUpgradeCostWithCC());
+		final double costEach = getStatus().getUpgradeCostWithCC();
+		final double totalCost = costEach * qty;
+		this.creditCardProcessor.charge(ccNumber, totalCost);
 	}
 }
