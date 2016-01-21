@@ -7,6 +7,7 @@ public class Member {
 	Status status;
 	int balance;
 	int ytdMiles;
+	int upgradeCount;
 	
 	public Member(String username, String email) {
 		this.username = username;
@@ -14,6 +15,7 @@ public class Member {
 		this.status = Status.RED;
 		balance = MemberConstants.PROMOTIONAL_BONUS_MILES;
 		ytdMiles = 0;
+		upgradeCount = 0;
 	}
 	
 	public String getUserName() 
@@ -63,6 +65,25 @@ public class Member {
 
 	public void updateStatus() {
 		status = Status.getStatus(ytdMiles);
+	}
+
+	public boolean purchaseUpgradeWithMiles(int numberOfUpgrades) {
+		boolean purchaseStatus = false;
+		
+		int upgradeCost = status.getUpgradeCostInMiles();
+		
+		if(upgradeCost <= balance)
+		{
+			purchaseStatus = true;
+			balance -= upgradeCost;
+			this.upgradeCount += numberOfUpgrades;
+		}
+		
+		return purchaseStatus;
+	}
+
+	public int getUpgradeCount() {
+		return upgradeCount;
 	}
 
 }
