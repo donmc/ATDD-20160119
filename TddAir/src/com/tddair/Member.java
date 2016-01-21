@@ -47,6 +47,9 @@ public class Member {
 	}
 
 	public void completeFlight(Flight completedFlight) throws FlightNotFoundException{
+		if (completedFlight == null)
+			throw new FlightNotFoundException("No flight found");
+		
 		addMiles(completedFlight.getMileage());
 		calculateStatus();
 	}
