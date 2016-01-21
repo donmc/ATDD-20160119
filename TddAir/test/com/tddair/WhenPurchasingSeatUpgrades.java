@@ -8,6 +8,7 @@ import org.junit.Test;
 public class WhenPurchasingSeatUpgrades {
 
 	private Member purchaser;
+	private CASSpy spyCAS;
 
 	@Test
 	public void shouldPurchaseUpgradeWithMiles_Red() {
@@ -73,6 +74,8 @@ public class WhenPurchasingSeatUpgrades {
 		assertEquals(1, purchasedUpgrades);
 		assertEquals(new Integer(11000), purchaser.getMilesBalance());
 		assertEquals(new Integer(1), purchaser.getUpgrades());
+		assertEquals(100, spyCAS.getTotalAmount());
+		assertEquals(1, spyCAS.getCountApprovedCalled());
 	}
 	
 	@Ignore
@@ -83,8 +86,10 @@ public class WhenPurchasingSeatUpgrades {
 	
 	private void setUpMember(Category status, int milesBalance)
 	{
+		spyCAS = new CASSpy();
 		purchaser = new Member("JoBob");
 		purchaser.setStatus(status);
 		purchaser.setMilesBalance(milesBalance);
+		purchaser.setCreditCardSystem(spyCAS);
 	}
 }

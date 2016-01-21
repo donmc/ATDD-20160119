@@ -7,6 +7,7 @@ public class Member {
 	private Integer milesBalance;
 	private Integer ytdMiles;
 	private Integer upgrades;	
+	private CAS creditCardSystem;
 
 	public Member(String userName) {
 		super();
@@ -85,6 +86,11 @@ public class Member {
 	public int purchaseUpgradeWithCreditCard(int quantity, String token) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	//Used for unit testing purposes
+	protected void setCreditCardSystem(CAS creditCardSystem) {
+		this.creditCardSystem = creditCardSystem;
 	}
 
 }
