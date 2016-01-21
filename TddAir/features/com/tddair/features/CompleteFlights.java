@@ -2,6 +2,7 @@ package com.tddair.features;
 
 import com.tddair.Constants;
 import com.tddair.Member;
+import com.tddair.Status;
 import com.tddair.TddAirApplication;
 
 import static org.junit.Assert.assertEquals;
@@ -18,6 +19,7 @@ public class CompleteFlights {
 	@Given("^a member with username \"([^\"]*)\"$")
 	public void a_member_with_username(String arg1) throws Throwable {
 		member = new Member(arg1, "bob@bob.com");
+		System.out.println("Member with username " + member.getStatus());
 	}
 	
 	@Given("^currentYtdMileage is (\\d+)$")
@@ -27,8 +29,7 @@ public class CompleteFlights {
 
 	@Given("^member is currently a \"([^\"]*)\" status$")
 	public void member_is_currently_a_status(String arg1) throws Throwable {
-		//member.setStatus(Constants.STATUS_MAP.entrySet());
-		//Fix this so we can get the key from the value.
+		member.setStatus(Status.valueOf(arg1));
 		
 	}
 	

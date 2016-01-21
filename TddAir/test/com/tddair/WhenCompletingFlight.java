@@ -21,101 +21,101 @@ public class WhenCompletingFlight {
 	@Test
 	public void shouldStayAtRedStatus()
 	{
-		member.setStatus(Constants.RED_STATUS);
+		member.setStatus(Status.Red);
 		member.setYtdMiles(500);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.RED_STATUS), member.getStatus());
+		assertEquals(Status.Red, member.getStatus());
 	}
 	
 	@Test
 	public void shouldStayAtGreenStatus()
 	{
-		member.setStatus(Constants.GREEN_STATUS);
+		member.setStatus(Status.Green);
 		member.setYtdMiles(26000);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GREEN_STATUS), member.getStatus());
+		assertEquals(Status.Green, member.getStatus());
 	}
 	
 	@Test
 	public void shouldStayAtBlueStatus()
 	{
-		member.setStatus(Constants.BLUE_STATUS);
+		member.setStatus(Status.Blue);
 		member.setYtdMiles(55000);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.BLUE_STATUS), member.getStatus());
+		assertEquals(Status.Blue, member.getStatus());
 	}
 	
 	@Test
 	public void shouldStayAtGoldenStatus()
 	{
-		member.setStatus(Constants.GOLDEN_STATUS);
+		member.setStatus(Status.Golden);
 		member.setYtdMiles(76000);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GOLDEN_STATUS), member.getStatus());
+		assertEquals(Status.Golden, member.getStatus());
 	}
 	
 	@Test
 	public void shouldBePromotedToGreenStatus()
 	{
-		member.setStatus(Constants.RED_STATUS);
+		member.setStatus(Status.Red);
 		member.setYtdMiles(24999);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GREEN_STATUS), member.getStatus());
+		assertEquals(Status.Green, member.getStatus());
 	}
 	
 	@Test
 	public void shouldBePromotedToBlueStatus()
 	{
-		member.setStatus(Constants.GREEN_STATUS);
+		member.setStatus(Status.Green);
 		member.setYtdMiles(49999);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.BLUE_STATUS), member.getStatus());
+		assertEquals(Status.Blue, member.getStatus());
 	}
 	
 	@Test
 	public void shouldBePromotedToGoldendStatus()
 	{
-		member.setStatus(Constants.BLUE_STATUS);
+		member.setStatus(Status.Blue);
 		member.setYtdMiles(74999);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GOLDEN_STATUS), member.getStatus());
+		assertEquals(Status.Golden, member.getStatus());
 	}
 	
 	@Test
 	public void shouldNotBeDemotedFromGoldenStatus()
 	{
-		member.setStatus(Constants.GOLDEN_STATUS);
+		member.setStatus(Status.Golden);
 		member.setYtdMiles(0);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GOLDEN_STATUS), member.getStatus());
+		assertEquals(Status.Golden, member.getStatus());
 	}
 	
 	@Test
 	public void shouldNotBeDemotedFromBlueStatus()
 	{
-		member.setStatus(Constants.BLUE_STATUS);
+		member.setStatus(Status.Blue);
 		member.setYtdMiles(0);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.BLUE_STATUS), member.getStatus());
+		assertEquals(Status.Blue, member.getStatus());
 	}
 	
 	@Test
 	public void shouldNotBeDemotedFromGreenStatus()
 	{
-		member.setStatus(Constants.GREEN_STATUS);
+		member.setStatus(Status.Green);
 		member.setYtdMiles(0);
 		app.completeFlight(member, "AA242");
 		
-		assertEquals(Constants.STATUS_MAP.get(Constants.GREEN_STATUS), member.getStatus());
+		assertEquals(Status.Green, member.getStatus());
 	}
 
 }
