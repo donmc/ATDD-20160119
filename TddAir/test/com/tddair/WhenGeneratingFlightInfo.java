@@ -1,7 +1,8 @@
 package com.tddair;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,18 +20,70 @@ public class WhenGeneratingFlightInfo {
 	}
 	
 	@Test
+	public void shouldThrowWhenOriginMissing() {
+		Flight badOriginFlight;
+		try {
+			badOriginFlight = new Flight(null, "LGA", 2000);
+			Assert.fail();
+		}
+		catch(IllegalArgumentException e) {
+			assertEquals("Invalid origin code", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldThrowWhenDestinationMissing() {
+		Flight badDestFlight;
+		try {
+			badDestFlight = new Flight("LGA", null, 2000);
+			Assert.fail();
+		}
+		catch(IllegalArgumentException e) {
+			assertEquals("Invalid destination code", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void shouldThrowWhenMileageTooLow() {
+		Flight badMileageFlight;
+		try {
+			badMileageFlight = new Flight("LGA", "ORD", 99);
+			Assert.fail();
+		}
+		catch(IllegalArgumentException e) {
+			assertEquals("Mileage muse be greater than 100", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void shouldBeProperlyFormatted() {
 		assertEquals("AA453 | DFW -> ORD | 923 miles", flight.getInfo());
 	}
 
 	@Test
 	public void shouldWorkForMultipleFlights() {
-		assertEquals("AA453 | DFW -> ORD | 923 miles", flight.getInfo());
+		assertEquals("AA453", flight.getFullFlightNumber());
+		assertEquals("WN2211", secondFlight.getFullFlightNumber());
 	}
 
 	@Test
 	public void shouldAllowForUnknownFightNumbers() {
-		assertEquals("AA453 | DFW -> ORD | 923 miles", flight.getInfo());
+		assertEquals("UNKNOWN", unknownFlight.getFullFlightNumber());
+	}
+	
+	@Test
+	public void shouldGetDestination() {
+		assertEquals("ORD", flight.getDestination());
+	}
+
+	@Test
+	public void shouldGetOrigin() {
+		assertEquals("DFW", flight.getOrigin());
+	}
+
+	@Test
+	public void shouldGetMileage() {
+		assertEquals(923, flight.getMileage());
 	}
 
 }
