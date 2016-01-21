@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.tddair.exceptions.DuplicateUserNameException;
 
-import cucumber.api.PendingException;
-
 public class TddAirApplication {
 	
 	private FlightDao flights = new FlightDao();
@@ -16,6 +14,10 @@ public class TddAirApplication {
 	
 	public void addFlight(String origin, String destination, int mileage, String airline, int number) {
 		flights.addFlight(origin, destination, mileage, airline, number);
+	}
+	
+	public Flight getFlight(final String flightNumber) {
+		return flights.getFlightBy(flightNumber);
 	}
 	
 	/**
