@@ -1,5 +1,7 @@
 package com.tddair;
 
+import java.math.BigDecimal;
+
 public class Member {
 	
 	String username;
@@ -8,6 +10,7 @@ public class Member {
 	int balance;
 	int ytdMiles;
 	int upgradeCount;
+	private CAS cas;
 	
 	public Member(String username, String email) {
 		this.username = username;
@@ -70,7 +73,7 @@ public class Member {
 	public boolean purchaseUpgradeWithMiles(int numberOfUpgrades) {
 		boolean purchaseStatus = false;
 		
-		int upgradeCost = status.getUpgradeCostInMiles();
+		int upgradeCost = (status.getUpgradeCostInMiles() * numberOfUpgrades);
 		
 		if(upgradeCost <= balance)
 		{
@@ -84,6 +87,21 @@ public class Member {
 
 	public int getUpgradeCount() {
 		return upgradeCount;
+	}
+
+	public void setCreditAuthroizationSystem(CAS cas) {
+		this.cas = cas;
+	}
+
+	public boolean purchaseUpgradeWithCC(int numberUpgradesToPurchase, String ccNumber) {
+		BigDecimal upgradeCostInDollars = status.getUpgradeCostInDollars().multiply(BigDecimal.valueOf(numberUpgradesToPurchase));
+		
+		boolean isPurchaseSuccessful = cas.processTransaction(ccNumber, upgradeCostInDollars);
+		if (isPurchaseSuccessful) {
+			upgradeCount += numberUpgradesToPurchase;
+		}
+		
+		return isPurchaseSuccessful;
 	}
 
 }

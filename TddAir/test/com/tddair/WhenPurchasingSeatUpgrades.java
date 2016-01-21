@@ -1,8 +1,11 @@
 package com.tddair;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
+import java.math.BigDecimal;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -31,6 +34,7 @@ public class WhenPurchasingSeatUpgrades {
 	
 	@Test
 	public void shouldPurchaseThreeUpgradesWithMiles() {
+		member.completeFlight(new Flight("ABC", "DEF", 20000, "AA", 123));
 		int expectedBalance = member.getBalance() - 30000;
 		boolean purchaseStatus = member.purchaseUpgradeWithMiles(3);
 		
@@ -41,16 +45,29 @@ public class WhenPurchasingSeatUpgrades {
 	}
 	
 	
-	@Ignore
 	@Test
 	public void shouldNotPurchaseUpgradesWithInsufficientMiles() {
-		fail("Not yet implemented");
+		int expectedBalance = member.getBalance();
+		boolean purchaseStatus = member.purchaseUpgradeWithMiles(3);
+		
+		
+		assertEquals(member.getUpgradeCount(), 0);
+		assertEquals(member.getBalance(), expectedBalance);
+		assertFalse(purchaseStatus);
 	}
 	
-	@Ignore
 	@Test
 	public void shouldPurchaseUpgradeWithCC() {
-		fail("Not yet implemented");
+		CAS spy = new CASSpy();
+		member.setCreditAuthroizationSystem(spy);
+		boolean purchasedUpgrade = member.purchaseUpgradeWithCC(1, "1234567890123456");
+		
+		
+		assertEquals(member.getUpgradeCount(), 1);
+		assertTrue(purchasedUpgrade);
+		
+		assertEquals(spy.getTransactionCount(), 1);
+		assertEquals(spy.getTransactionCost(), BigDecimal.valueOf(100));
 	}
 	
 	@Ignore
