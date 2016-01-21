@@ -8,6 +8,7 @@ public class Member {
 	private int milesBalance;
 	private int ytdMiles;
 	private int upgrades;
+	private CreditSystem creditSystem;
 
 	public Member(String username, String email) {
 		this.username = username;
@@ -26,17 +27,29 @@ public class Member {
 			this.status = status.getStatus(this.ytdMiles);	
 		}
 	}
-	
-	//From Miles
-	//Miles -= amount * number Of Upgrades
+
 	public void purchaseUpgrade(int numberOfUpgrades)
 	{
+		int costOfUpgrades = numberOfUpgrades * status.getMilesCost();
+		
+		if(costOfUpgrades > milesBalance)
+		{
+			throw new InsuffiecentMilesException("Your Balance is too low.");
+		}
+		
+		milesBalance -= costOfUpgrades;
+		upgrades += numberOfUpgrades;
 		
 	}
 	
 	public void purchaseUpgrade(int numberOfUpgrades, String ccNumber)
 	{
-		
+		int costOfUpgrades = numberOfUpgrades * status.getDollarCost();
+		boolean approved = creditSystem.approve(ccNumber, costOfUpgrades);
+		if(!approved) {
+			throw new CreditNotApprovedException("Insufficient credit");
+		}
+		upgrades += numberOfUpgrades;
 	}
 
 	public String getUserName() {
@@ -49,6 +62,10 @@ public class Member {
 	
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	
+	public void setMilesBalance(int milesBalance) {
+		this.milesBalance = milesBalance;
 	}
 
 	public int getMilesBalance() {
@@ -67,6 +84,14 @@ public class Member {
 	{
 		ytdMiles += flight.getMileage();
 		milesBalance += flight.getMileage();
+	}
+
+	public int getUpgrades() {
+		return upgrades;
+	}
+
+	public void setCreditSystem(CreditSystem creditSystem) {
+		this.creditSystem = creditSystem;
 	}
 
 	
