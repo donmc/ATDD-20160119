@@ -41,3 +41,14 @@ Feature: Flight tracking/points accumulation
 		 Then the status for "backwardsFlyer" is "Golden"
 		  And the reward balance for "backwardsFlyer" is 35891 miles
 		  And the YTD balance for "backwardsFlyer" is 84891 miles
+
+	Scenario: Member has carried over golden status from previous year
+		Given existing members
+		      | userName       | emailAddress     | status | rewardBalance | ytdBalance |
+		      | backwardsFlyer | test1@tddair.com | Golden | 50000         | 0          |
+		 When "backwardsFlyer" completes flight "AA242"
+		  And "backwardsFlyer" completes flight "WN666"
+		 Then the status for "backwardsFlyer" is "Golden"
+		  And the reward balance for "backwardsFlyer" is 75815 miles
+		  And the YTD balance for "backwardsFlyer" is 25815 miles
+
