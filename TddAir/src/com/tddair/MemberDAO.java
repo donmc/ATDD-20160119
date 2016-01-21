@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.tddair.constants.ErrorMessage;
+import com.tddair.constants.Status;
 import com.tddair.exceptions.DuplicateUserNameException;
 
 public class MemberDAO {
@@ -65,5 +66,24 @@ public class MemberDAO {
 	 */
 	public List<Member> getAllMembers() {
 		return this.members;
+	}
+
+	public void incrementBalanceForCompleteFlight(Member member, int mileage) {
+		//Increment Rewards Balance and YTD Balance for given mileage for a flight
+		member.setRewardsBalance(member.getRewardBalance() + mileage);
+		member.setYtdBalance(member.getYtdBalance() + mileage);
+	}
+
+	public void checkUpgradeStatus(Member member) {
+		int currentYTDBalance = member.getYtdBalance();
+		
+		if (currentYTDBalance >= 25000 && currentYTDBalance < 50000) {
+			member.setStatus(Status.GREEN);
+		} else if (currentYTDBalance >= 50000 && currentYTDBalance < 75000) {
+			member.setStatus(Status.BLUE);
+		} else if (currentYTDBalance >= 75000) {
+			member.setStatus(Status.GOLDEN);
+		}
+		
 	}
 }

@@ -54,4 +54,12 @@ public class Member {
 	public int getYtdBalance() {
 		return ytdBalance;
 	}
+
+	public void setRewardsBalance(int rewardBalance) {
+		this.rewardBalance = rewardBalance;
+	}
+
+	public void setYtdBalance(int ytdBalance) {
+		this.ytdBalance = ytdBalance;
+	}
 }

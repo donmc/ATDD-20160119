@@ -50,4 +50,12 @@ public class TddAirApplication {
 	public MemberDAO getMemberDAO() {
 		return this.memberDAO;
 	}
+
+	public void completeFlight(Member member, String flightNumber) {
+		//Get the FlightDAO object for the flightNumber
+		Flight currentFlight = flights.getFlightBy(flightNumber);
+		
+		memberDAO.incrementBalanceForCompleteFlight(member, currentFlight.getMileage());
+		memberDAO.checkUpgradeStatus(member);
+	}
 }
