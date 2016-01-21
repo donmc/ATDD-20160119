@@ -13,9 +13,7 @@ public class WhenRegisteringFlyers {
 
 	@Before
 	public void setup() {
-		//String username = "bob";
 		String email = "bob@bob.com";
-		//TddAirApplication app = new TddAirApplication();
 		app = new TddAirApplication();
 		app.registerAsMember(username, email);
 		member = app.lookUpMember(username);

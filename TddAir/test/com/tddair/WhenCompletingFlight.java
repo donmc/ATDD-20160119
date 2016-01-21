@@ -14,7 +14,6 @@ public class WhenCompletingFlight {
 	@Before
 	public void setup() {
 		String email = "bob@bob.com";
-		
 		member = new Member(username, email);
 	}
 	

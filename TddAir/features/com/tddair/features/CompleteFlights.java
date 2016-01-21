@@ -1,11 +1,10 @@
 package com.tddair.features;
 
-import com.tddair.Constants;
+import static org.junit.Assert.assertEquals;
+
 import com.tddair.Member;
 import com.tddair.Status;
 import com.tddair.TddAirApplication;
-
-import static org.junit.Assert.assertEquals;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -19,7 +18,6 @@ public class CompleteFlights {
 	@Given("^a member with username \"([^\"]*)\"$")
 	public void a_member_with_username(String arg1) throws Throwable {
 		member = new Member(arg1, "bob@bob.com");
-		System.out.println("Member with username " + member.getStatus());
 	}
 	
 	@Given("^currentYtdMileage is (\\d+)$")
@@ -40,8 +38,7 @@ public class CompleteFlights {
 	
 	@Then("^their member status is \"([^\"]*)\"$")
 	public void their_member_status_is(String arg1) throws Throwable {
-		
-	   assertEquals(arg1, member.getStatus());
+	   assertEquals(Status.valueOf(arg1), member.getStatus());
 	}
 
 }

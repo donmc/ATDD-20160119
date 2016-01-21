@@ -5,7 +5,6 @@ public class Member {
 	private String username;
 	private String email;
 	private Status status;
-	//private int status;
 	private int milesBalance;
 	private int ytdMiles;
 
@@ -15,8 +14,6 @@ public class Member {
 		this.status = Status.Red;
 		this.milesBalance = 10000;
 		this.ytdMiles = 0;
-		
-		System.out.println("Constructor status = " + this.status);
 	}
 	
 	public void completeFlight(Flight flight) {
@@ -36,15 +33,11 @@ public class Member {
 	}
 
 	public Status getStatus() {
-		//return Constants.STATUS_MAP.get(status);
 		return status;
 	}
 	
 	public void setStatus(Status status) {
-		//this.status = status;
 		this.status = status;
-		
-		System.out.println("Status is = " + this.status);
 	}
 
 	public int getMilesBalance() {
