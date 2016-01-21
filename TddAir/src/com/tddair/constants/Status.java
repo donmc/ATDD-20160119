@@ -30,10 +30,16 @@ public enum Status {
 		return level;
 	}
 
+	/**
+	 * @return The low end of the mileage range for this status, inclusive
+	 */
 	public int getMinLevelMiles() {
 		return minLevelMiles;
 	}
 	
+	/**
+	 * @return The high end of the mileage range for this status, exclusive
+	 */
 	public int getMaxLevelMiles() {
 		return maxLevelMiles;
 	}
