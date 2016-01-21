@@ -1,18 +1,20 @@
 package com.tddair;
 
 public enum Category {
-	Red(25000, 10000),
-	Green(50000, 9000),
-	Blue(75000, 8000),
-	Golden(0, 7000);
+	Red(25000, 10000, 100),
+	Green(50000, 9000, 90),
+	Blue(75000, 8000, 75),
+	Golden(0, 7000, 60);
 	
 	private int maxMilesForCategory;
-	private int upgradePurchasePrice;
+	private int upgradeMilesCost;
+	private int upgradeDollarsCost;
 	
-	private Category(int maxMilesForCategory, int upgradePurchasePrice)
+	private Category(int maxMilesForCategory, int upgradePurchasePrice, int upgradeDollarsCost)
 	{
 		this.maxMilesForCategory = maxMilesForCategory;
-		this.upgradePurchasePrice = upgradePurchasePrice;
+		this.upgradeMilesCost = upgradePurchasePrice;
+		this.upgradeDollarsCost=upgradeDollarsCost;
 	}
 	
 	public int getMaxMilesForCategory()
@@ -35,9 +37,14 @@ public enum Category {
 			return this;
 	}
 
-	public int getUpgradePurchasePrice() 
+	public int getUpgradeMilesCost() 
 	{
 		// TODO Auto-generated method stub
-		return upgradePurchasePrice;
+		return upgradeMilesCost;
 	}
+
+	public int getUpgradeDollarsCost() {
+		return upgradeDollarsCost;
+	}
+
 }

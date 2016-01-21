@@ -67,7 +67,7 @@ public class Member {
 
 	public int purchaseUpgradeWithMiles(int quantity) {
 		// TODO Auto-generated method stub
-		int cost = quantity * status.getUpgradePurchasePrice();
+		int cost = quantity * status.getUpgradeMilesCost();
 		if (cost < milesBalance )
 		{
 		  this.upgrades = this.upgrades + quantity;
@@ -83,9 +83,10 @@ public class Member {
 		return upgrades;
 	}
 
-	public int purchaseUpgradeWithCreditCard(int quantity, String token) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void purchaseUpgradeWithCreditCard(int quantity, String token) {
+		int amount =this.status.getUpgradeDollarsCost()*quantity;
+		creditCardSystem.approve(token, amount);
+		this.upgrades = this.upgrades + quantity;
 	}
 
 	//Used for unit testing purposes

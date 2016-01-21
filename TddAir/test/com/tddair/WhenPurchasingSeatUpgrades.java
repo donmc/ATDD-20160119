@@ -70,18 +70,22 @@ public class WhenPurchasingSeatUpgrades {
 	@Test
 	public void shouldPurchaseanUpgradeWithCreditCard_Red() {
 		setUpMember(Category.Red, 11000);
-		int purchasedUpgrades = purchaser.purchaseUpgradeWithCreditCard(1, "9999111155558888");
-		assertEquals(1, purchasedUpgrades);
+		purchaser.purchaseUpgradeWithCreditCard(1, "9999111155558888");
 		assertEquals(new Integer(11000), purchaser.getMilesBalance());
 		assertEquals(new Integer(1), purchaser.getUpgrades());
 		assertEquals(100, spyCAS.getTotalAmount());
 		assertEquals(1, spyCAS.getCountApprovedCalled());
 	}
 	
-	@Ignore
+
 	@Test
 	public void shouldNotPurchaseanUpgradeWithInvalidCreditCard() {
-		fail("Not yet implemented");
+		setUpMember(Category.Red, 11000);
+		purchaser.purchaseUpgradeWithCreditCard(1, "9BSVCdfds8");
+		assertEquals(new Integer(11000), purchaser.getMilesBalance());
+		assertEquals(new Integer(0), purchaser.getUpgrades());
+		assertEquals(0, spyCAS.getTotalAmount());
+		assertEquals(1, spyCAS.getCountApprovedCalled());
 	}
 	
 	private void setUpMember(Category status, int milesBalance)
