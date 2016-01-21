@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import com.tddair.Member;
+import com.tddair.constants.Status;
 import com.tddair.exceptions.DuplicateUserNameException;
 
 import cucumber.api.java.en.Given;
@@ -56,8 +57,10 @@ public class RegistrationSteps {
 	@Then("^the status for \"([^\"]*)\" is \"([^\"]*)\"$")
 	public void testMemberStatus(final String userName, final String expectedStatus) throws Throwable {
 		final Member member = StepData.getMemberDAO().getMemberByUserName(userName);
+		
+		final Status parsedExpectedStatus = Status.fromDisplayName(expectedStatus);
 		assertEquals("Status should be " + expectedStatus, 
-				expectedStatus, member.getStatus());
+				parsedExpectedStatus, member.getStatus());
 	}
 
 	@Then("^the reward balance for \"([^\"]*)\" is (\\d+) miles$")

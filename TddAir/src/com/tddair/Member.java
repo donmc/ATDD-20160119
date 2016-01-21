@@ -5,7 +5,7 @@ import com.tddair.constants.Status;
 public class Member {
 	private String userName;
 	private String emailAddress;
-	private String status;
+	private Status status;
 	private int rewardBalance;
 	private int ytdBalance;
 	
@@ -17,7 +17,7 @@ public class Member {
 		this(userName, email, Status.RED, 10000, 0);
 	}
 	
-	public Member(final String userName, final String emailAddress, final String status, 
+	public Member(final String userName, final String emailAddress, final Status status, 
 			final int rewardBalance, final int ytdBalance) {
 		this.userName = userName;
 		this.emailAddress = emailAddress;
@@ -40,10 +40,10 @@ public class Member {
 		this.emailAddress = emailAddress;
 	}
 	
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
-	public void setStatus(final String status) {
+	public void setStatus(final Status status) {
 		this.status = status;
 	}
 

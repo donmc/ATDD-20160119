@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.tddair.constants.Status;
 import com.tddair.exceptions.DuplicateUserNameException;
 
 public class WhenRegisteringFlyer {
@@ -33,7 +34,7 @@ public class WhenRegisteringFlyer {
 	@Test
 	public void shouldHaveRedStatus() {
 		assertEquals("Initial status should be Red", 
-				"Red", member.getStatus());
+				Status.RED, member.getStatus());
 	}
 	
 	@Test
