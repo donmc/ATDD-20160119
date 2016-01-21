@@ -1,6 +1,8 @@
 package com.tddair;
 
 import com.tddair.constants.Status;
+import com.tddair.services.CreditCardProcessor;
+import com.tddair.services.impl.AmericanExpressCreditCardProcessor;
 
 public class Member {
 	private String userName;
@@ -8,6 +10,8 @@ public class Member {
 	private Status status;
 	private int rewardBalance;
 	private int ytdBalance;
+	
+	private CreditCardProcessor creditCardProcessor = new AmericanExpressCreditCardProcessor();
 	
 	public Member() {
 		this("", "");
@@ -61,5 +65,17 @@ public class Member {
 
 	public void setYtdBalance(int ytdBalance) {
 		this.ytdBalance = ytdBalance;
+	}
+
+	public void setCreditCardProcessor(final CreditCardProcessor creditCardProcessor) {
+		this.creditCardProcessor = creditCardProcessor;
+	}
+	
+	public void purchaseUpgrade(final int qty) {
+		throw new UnsupportedOperationException("Not yet implemented");
+	}
+	
+	public void purchaseUpgradeWithCreditCard(final int qty, final String ccNumber) {
+		throw new UnsupportedOperationException("Not yet implemented");
 	}
 }
