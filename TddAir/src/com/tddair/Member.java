@@ -6,14 +6,14 @@ public class Member {
 	private Category status;
 	private Integer milesBalance;
 	private Integer ytdMiles;
-	
-	
+	private Integer upgrades;	
 
 	public Member(String userName) {
 		super();
 		this.userName = userName;
 		milesBalance = new Integer(0);
 		ytdMiles = new Integer(0);
+		upgrades = new Integer(0);
 		status = Category.Red;
 	}
 
@@ -66,9 +66,20 @@ public class Member {
 
 	public int purchaseUpgradeWithMiles(int quantity) {
 		// TODO Auto-generated method stub
-		return 0;
+		int cost = quantity *10000;
+		if (cost < milesBalance )
+		{
+		  this.upgrades = this.upgrades + quantity;
+		  milesBalance= milesBalance - cost;
+		  return quantity;
+		}
+		else {
+		  return 0;
+		}
 	}
-	
 
+	public Integer getUpgrades() {
+		return upgrades;
+	}
 
 }

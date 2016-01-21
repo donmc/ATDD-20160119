@@ -17,3 +17,4 @@ Scenario: Duplicate User Name
 Given a flyer with username "donmc" and email "don@improving.com" registers
 When a flyer with username "donmc" and email "don@gmail.com" registers
 Then error "Duplicate username!" is returned
+
