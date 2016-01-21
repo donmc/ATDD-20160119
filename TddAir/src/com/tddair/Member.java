@@ -19,11 +19,11 @@ public class Member {
 	
 	public Member(final String userName, final String emailAddress, final Status status, 
 			final int rewardBalance, final int ytdBalance) {
-		this.userName = userName;
-		this.emailAddress = emailAddress;
-		this.status = status;
-		this.rewardBalance = rewardBalance;
-		this.ytdBalance = ytdBalance;
+		setUserName(userName);
+		setEmailAddress(emailAddress);
+		setStatus(status);
+		setRewardsBalance(rewardBalance);
+		setYtdBalance(ytdBalance);
 	}
 
 	public String getUserName() {
