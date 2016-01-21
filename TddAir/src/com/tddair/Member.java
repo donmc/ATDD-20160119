@@ -7,6 +7,8 @@ public class Member {
 	private MemberStatus status;
 	private long ytdMiles;
 	private long balanceMiles;
+	private int upgradeQTY;
+	private CardService cardService = new CardService();
 	
 	public Member(String userName, String email)
 	{
@@ -56,4 +58,56 @@ public class Member {
 		status = MemberStatus.getStatus(ytdMiles);
 	}
 
+	public int purchaseUpgrade(int i) throws Exception  
+	{ 
+		if(i > 0)
+		{
+			long upgradeInMilesCost = status.getUpgradeInMile();
+			
+			if ((balanceMiles >= (i * upgradeInMilesCost)))
+			{
+				balanceMiles -= i * upgradeInMilesCost;
+				upgradeQTY += i;
+			} 
+			else 
+			{
+				throw new Exception("Not enough Milage for upgrade !!");  
+			}
+		}
+		
+		return i;
+	}
+
+	public int purchaseUpgradeCC(int i, String cardNo) throws Exception  
+	{
+		if(i > 0)
+		{
+			double upgradeCost = status.getUpgradeInDollars();
+			
+			if(cardService.approve(cardNo, (i*upgradeCost)))
+			{
+				upgradeQTY += i;
+			}
+		}
+		
+		return i;
+	}
+
+	public int getUpgradeQTY() {
+		return upgradeQTY;
+	}
+
+	public void setUpgradeQTY(int upgrade) {
+		this.upgradeQTY = upgrade;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setCCService(CardServiceSpy cardServiceSpy) {
+		cardService = cardServiceSpy;
+		
+	}
+	
 }

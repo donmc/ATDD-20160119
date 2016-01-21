@@ -10,9 +10,9 @@ public enum MemberStatus {
 	private long minMiles;
 	private long maxMiles;
 	private long upgradeInMile;
-	private long upgradeInDollars;
+	private double upgradeInDollars;
 	
-	MemberStatus(long minMiles, long maxMiles, long upgradeInMiles, long upgradeInDollars) {
+	MemberStatus(long minMiles, long maxMiles, long upgradeInMiles, double upgradeInDollars) {
 		
 		this.minMiles = minMiles;
 		this.maxMiles = maxMiles;
@@ -28,4 +28,13 @@ public enum MemberStatus {
 		}
 		return MemberStatus.RED;
 	}
+
+	public long getUpgradeInMile() {
+		return upgradeInMile;
+	}
+
+	public double getUpgradeInDollars() {
+		return upgradeInDollars;
+	}
+	
 }
