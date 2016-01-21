@@ -76,12 +76,13 @@ public class MemberDAO {
 
 	public void checkUpgradeStatus(Member member) {
 		int currentYTDBalance = member.getYtdBalance();
+		Status currentStatus = member.getStatus();
 		
-		if (currentYTDBalance >= 25000 && currentYTDBalance < 50000) {
+		if (currentStatus.isLowerThan(Status.GREEN) && currentYTDBalance > Status.GREEN.getMinLevelMiles()) {
 			member.setStatus(Status.GREEN);
-		} else if (currentYTDBalance >= 50000 && currentYTDBalance < 75000) {
+		} else if (currentStatus.isLowerThan(Status.BLUE) && currentYTDBalance > Status.BLUE.getMinLevelMiles()) {
 			member.setStatus(Status.BLUE);
-		} else if (currentYTDBalance >= 75000) {
+		} else if (currentStatus.isLowerThan(Status.GOLDEN) && currentYTDBalance > Status.GOLDEN.getMinLevelMiles()) {
 			member.setStatus(Status.GOLDEN);
 		}
 		
